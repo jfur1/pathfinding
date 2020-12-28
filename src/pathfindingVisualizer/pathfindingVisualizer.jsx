@@ -9,6 +9,7 @@ const START_NODE_COL = 15;
 const FINISH_NODE_ROW = 10;
 const FINISH_NODE_COL = 35;
 
+
 export default class PathfindingVisualizer extends Component {
   constructor() {
     super();
@@ -59,6 +60,9 @@ export default class PathfindingVisualizer extends Component {
     for (let i = 0; i < path.length; i++) {
       setTimeout(() => {
         const node = path[i];
+        // Keep Start and Target Nodes original color
+        
+
         document.getElementById(`node-${node.row}-${node.col}`).className =
           'node node-shortest-path';
       }, 50 * i);
@@ -76,9 +80,9 @@ export default class PathfindingVisualizer extends Component {
 
   render() {
     const {grid, mouseDown} = this.state;
-
     return (
       <>
+      <br/>
         <button onClick={() => this.visualizeSearch()}>
           Visualize Algorithm
         </button>
@@ -148,3 +152,5 @@ const updateGrid = (grid, row, col) => {
   newGrid[row][col] = newNode;
   return newGrid;
 };
+
+// const clearGrid

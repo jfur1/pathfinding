@@ -64,7 +64,7 @@
   @keyframes path {
     0% {
       transform: scale(0.6);
-      background-color: rgb(54, 240, 69);
+      background-color: green;
     }
   
     50% {
@@ -74,6 +74,6 @@
   
     100% {
       transform: scale(1);
-      background-color: rgb(54, 240, 69);
+      background-color: yellow;
     }
   }

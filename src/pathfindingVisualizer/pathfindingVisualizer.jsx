@@ -16,6 +16,7 @@ export default class PathfindingVisualizer extends Component {
     this.state = {
       grid: [],
       mouseDown: false,
+      algoFinished: false
     };
   }
 
@@ -24,18 +25,18 @@ export default class PathfindingVisualizer extends Component {
     this.setState({grid});
   }
 
-  mouseDownHandler(row, col) {
+  onMouseDown(row, col) {
     const newGrid = updateGrid(this.state.grid, row, col);
     this.setState({grid: newGrid, mouseDown: true});
   }
 
-  mouseEnterHandler(row, col) {
+  onMouseEnter(row, col) {
     if (!this.state.mouseDown) return;
     const newGrid = updateGrid(this.state.grid, row, col);
     this.setState({grid: newGrid});
   }
 
-  mouseUpHandler() {
+  onMouseUp() {
     this.setState({mouseDown: false});
   }
 
@@ -60,22 +61,41 @@ export default class PathfindingVisualizer extends Component {
     for (let i = 0; i < path.length; i++) {
       setTimeout(() => {
         const node = path[i];
-        // Keep Start and Target Nodes original color
-        
-
         document.getElementById(`node-${node.row}-${node.col}`).className =
           'node node-shortest-path';
       }, 50 * i);
     }
+    this.algoFinished = true;
   }
 
   visualizeSearch() {
+    this.algoFinished = false;
     const {grid} = this.state;
     const start = grid[START_NODE_ROW][START_NODE_COL];
     const goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
     const visited = dijkstra(grid, start, goal);
     const path = getPath(goal);
     this.animateSearch(visited, path);
+  }
+
+  clearGrid() {
+    if(this.algoFinished){
+      const grid = initGrid();
+      this.setState({grid});
+      for(let row = 0; row < 20; row++) {
+        for (let col = 0; col < 50; col++) {
+          if(row === START_NODE_ROW && col === START_NODE_COL){
+            document.getElementById(`node-${row}-${col}`).className = 'node node-start';
+          }
+          else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
+            document.getElementById(`node-${row}-${col}`).className = 'node node-finish';
+          }
+          else{
+            document.getElementById(`node-${row}-${col}`).className = 'node';
+          }
+        }
+      }
+    }
   }
 
   render() {
@@ -86,6 +106,9 @@ export default class PathfindingVisualizer extends Component {
         <button onClick={() => this.visualizeSearch()}>
           Visualize Algorithm
         </button>
+        <br/>
+        {/* Should only be clickable when animation not running */}
+        <button onClick={() => this.clearGrid()}>Clear Grid</button>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
@@ -100,11 +123,11 @@ export default class PathfindingVisualizer extends Component {
                       isStart={isStart}
                       isWall={isWall}
                       mouseDown={mouseDown}
-                      onMouseDown={(row, col) => this.mouseDownHandler(row, col)}
+                      onMouseDown={(row, col) => this.onMouseDown(row, col)}
                       onMouseEnter={(row, col) =>
-                        this.mouseEnterHandler(row, col)
+                        this.onMouseEnter(row, col)
                       }
-                      onMouseUp={() => this.mouseUpHandler()}
+                      onMouseUp={() => this.onMouseUp()}
                       row={row}></Node>
                   );
                 })}
@@ -142,6 +165,7 @@ const newNode = (col, row) => {
   };
 };
 
+// Update our grid state
 const updateGrid = (grid, row, col) => {
   const newGrid = grid.slice();
   const node = newGrid[row][col];
@@ -153,4 +177,3 @@ const updateGrid = (grid, row, col) => {
   return newGrid;
 };
 
-// const clearGrid

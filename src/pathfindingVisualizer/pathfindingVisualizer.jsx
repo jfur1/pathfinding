@@ -16,7 +16,8 @@ export default class PathfindingVisualizer extends Component {
     this.state = {
       grid: [],
       mouseDown: false,
-      algoFinished: false
+      algoFinished: true,
+      currentAlgo: null,
     };
   }
 
@@ -78,8 +79,8 @@ export default class PathfindingVisualizer extends Component {
     this.animateSearch(visited, path);
   }
 
-  clearGrid() {
-    if(this.algoFinished){
+  clearGrid(algoFinished) {
+    if(algoFinished){
       const grid = initGrid();
       this.setState({grid});
       for(let row = 0; row < 20; row++) {
@@ -99,16 +100,17 @@ export default class PathfindingVisualizer extends Component {
   }
 
   render() {
-    const {grid, mouseDown} = this.state;
+    const {grid, mouseDown, algoFinished} = this.state;
+    
     return (
       <>
       <br/>
-        <button onClick={() => this.visualizeSearch()}>
+        <button id="startButton" onClick={() => this.visualizeSearch()}>
           Visualize Algorithm
         </button>
         <br/>
         {/* Should only be clickable when animation not running */}
-        <button onClick={() => this.clearGrid()}>Clear Grid</button>
+        <button onClick={() => this.clearGrid(algoFinished)}>Clear Grid</button>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (
@@ -124,9 +126,7 @@ export default class PathfindingVisualizer extends Component {
                       isWall={isWall}
                       mouseDown={mouseDown}
                       onMouseDown={(row, col) => this.onMouseDown(row, col)}
-                      onMouseEnter={(row, col) =>
-                        this.onMouseEnter(row, col)
-                      }
+                      onMouseEnter={(row, col) => this.onMouseEnter(row, col)}
                       onMouseUp={() => this.onMouseUp()}
                       row={row}></Node>
                   );

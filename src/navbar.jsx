@@ -13,6 +13,7 @@ export default class Navbar extends Component{
     }
     
     toggleDropdown(){
+        
         document.getElementById("myDropdown").classList.toggle("show");
     }
 
@@ -26,12 +27,12 @@ export default class Navbar extends Component{
         return(
             <div class="navbar">
                 <div class="dropdown">
-                    <button onClick={() => this.toggleDropdown()} class="dropbtn">Choose an Algorithm</button>
+                    <button onClick={() => this.toggleDropdown()} class="dropbtn">Select an Algorithm</button>
                     <div id="myDropdown" class="dropdown-content">
-                        <a href="#dijkstra" id="dijkstraStart" onClick={() => this.selectAlgo("Dijkstra's Algorithm")}>Dijkstra's Algorithm</a>
-                        <a href="#astar" id="astarStart" onClick={() => this.selectAlgo("A* Search")}>A* Search</a>
-                        <a href="bfs#" id="bfsStart" onClick={() => this.selectAlgo("Breadth-First-Search")}>BFS</a>
-                        <a href="dfs#" id="dfsStart" onClick={() => this.selectAlgo("Depth-First-Search")}>DFS</a>
+                        <a href="#" id="dijkstraStart" onClick={() => this.selectAlgo("Dijkstra's Algorithm")}>Dijkstra's Algorithm</a>
+                        <a href="#" id="astarStart" onClick={() => this.selectAlgo("A* Search")}>A* Search</a>
+                        <a href="#" id="bfsStart" onClick={() => this.selectAlgo("Breadth-First-Search")}>BFS</a>
+                        <a href="#" id="dfsStart" onClick={() => this.selectAlgo("Depth-First-Search")}>DFS</a>
                     </div>
                 </div>
             </div>

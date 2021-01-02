@@ -64,23 +64,27 @@ export default class PathfindingVisualizer extends Component {
         const node = path[i];
         document.getElementById(`node-${node.row}-${node.col}`).className =
           'node node-shortest-path';
-      }, 50 * i);
+      }, 35 * i);
     }
     this.algoFinished = true;
+    document.getElementById("startButton").disabled = false;
+    document.getElementById("clearGridButton").disabled = false;
   }
 
   visualizeSearch() {
-    this.algoFinished = false;
-    const {grid} = this.state;
-    const start = grid[START_NODE_ROW][START_NODE_COL];
-    const goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-    const visited = dijkstra(grid, start, goal);
-    const path = getPath(goal);
-    this.animateSearch(visited, path);
+      document.getElementById("startButton").disabled = true;
+      document.getElementById("clearGridButton").disabled = true;
+      this.algoFinished = false;
+      const {grid} = this.state;
+      const start = grid[START_NODE_ROW][START_NODE_COL];
+      const goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+      const visited = dijkstra(grid, start, goal);
+      const path = getPath(goal);
+      this.animateSearch(visited, path);
   }
 
-  clearGrid(algoFinished) {
-    if(algoFinished){
+  clearGrid() {
+    if(this.algoFinished){
       const grid = initGrid();
       this.setState({grid});
       for(let row = 0; row < 20; row++) {
@@ -104,13 +108,12 @@ export default class PathfindingVisualizer extends Component {
     
     return (
       <>
-      <br/>
-        <button id="startButton" onClick={() => this.visualizeSearch()}>
-          Visualize Algorithm
-        </button>
-        <br/>
-        {/* Should only be clickable when animation not running */}
-        <button onClick={() => this.clearGrid(algoFinished)}>Clear Grid</button>
+        <div class="center">
+          <button id="startButton" onClick={() => this.visualizeSearch()}>Visualize Algorithm</button>
+        </div>
+        <div class="center">
+          <button id="clearGridButton" onClick={() => this.clearGrid()}>Clear Grid</button>
+        </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
             return (

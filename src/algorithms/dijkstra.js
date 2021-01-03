@@ -8,7 +8,7 @@
 
 export function dijkstra(grid, start, goal) {
     const visited = [];
-    start.distance = 0;
+    start.g = 0;
     const frontier = getNodes(grid);
     while (!!frontier.length) {
       sortNodes(frontier);
@@ -18,7 +18,7 @@ export function dijkstra(grid, start, goal) {
       // Skip checks for any walls
       if (node.isWall) continue;
       // If the closest node is infinite distance, then no path exists to our goal
-      if (node.distance === Infinity) return visited;
+      if (node.g === Infinity) return visited;
 
       node.isVisited = true;
       visited.push(node);
@@ -29,14 +29,14 @@ export function dijkstra(grid, start, goal) {
   
   // Sort the nodes by distance
   function sortNodes(frontier) {
-    frontier.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
+    frontier.sort((nodeA, nodeB) => nodeA.g - nodeB.g);
   }
   
   function updateNeighborCosts(node, grid) {
     const unvisitedNeighbors = getNeighbors(node, grid);
     for (const neighbor of unvisitedNeighbors) {
-      neighbor.distance = node.distance + 1;
-      neighbor.previousNode = node;
+      neighbor.g = node.g + 1;
+      neighbor.prev = node;
     }
   }
   
@@ -67,7 +67,7 @@ export function dijkstra(grid, start, goal) {
     let tmpNode = goal;
     while (tmpNode !== null) {
       path.unshift(tmpNode);
-      tmpNode = tmpNode.previousNode;
+      tmpNode = tmpNode.prev;
     }
     return path;
   }

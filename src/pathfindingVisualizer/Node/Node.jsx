@@ -12,9 +12,12 @@ export default class Node extends Component {
       onMouseEnter,
       onMouseUp,
       row,
-      distance,
-      heuristicDist,
-      totalDist
+      g,
+      h,
+      f,
+      direction,
+      weight,
+      prev
     } = this.props;
     const type = isFinish
       ? 'node-finish'

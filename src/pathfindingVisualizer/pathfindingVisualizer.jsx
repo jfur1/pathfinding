@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import Node from './Node/Node';
 import {dijkstra, getPath} from '../algorithms/dijkstra';
-
+import {astar, getAstarPath} from '../algorithms/astar';
 import './pathfindingVisualizer.css';
 
 const START_NODE_ROW = 10;
@@ -15,15 +15,18 @@ export default class PathfindingVisualizer extends Component {
     super();
     this.state = {
       grid: [],
+      nodes: {},
       mouseDown: false,
       algoFinished: true,
       currentAlgo: null,
+      start: null,
+      target: null
     };
   }
 
   componentDidMount() {
-    const grid = initGrid();
-    this.setState({grid});
+    const board = this.initGrid();
+    this.setState({grid: board[0], nodes: board[1]});
   }
 
   onMouseDown(row, col) {
@@ -72,21 +75,40 @@ export default class PathfindingVisualizer extends Component {
   }
 
   visualizeSearch() {
+      const algo = document.getElementById("startButton").innerHTML;
       document.getElementById("startButton").disabled = true;
       document.getElementById("clearGridButton").disabled = true;
+      console.log(algo);
       this.algoFinished = false;
-      const {grid} = this.state;
+      const {grid, nodes} = this.state;
       const start = grid[START_NODE_ROW][START_NODE_COL];
       const goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-      const visited = dijkstra(grid, start, goal);
-      const path = getPath(goal);
-      this.animateSearch(visited, path);
+      var visited = [];
+      var path = [];
+      // Select algo based on start button text
+      if(algo === "A* Search"){
+        console.log(nodes)
+        // console.log("start:", start)
+        // console.log("start-id:", start.id)
+        // console.log("goal:", goal)
+        visited = astar(nodes, start, goal, visited, grid, []);
+        path = getAstarPath(goal);
+        console.log("Visited:", visited);
+        console.log("Path:", path);
+        this.animateSearch(visited, path);
+      }
+      else if(algo === "Dijkstra's Algorithm"){
+        visited = dijkstra(grid, start, goal);
+        path = getPath(goal);
+        this.animateSearch(visited, path);
+      }
+      
   }
 
   clearGrid() {
     if(this.algoFinished){
-      const grid = initGrid();
-      this.setState({grid});
+      const board = this.initGrid();
+      this.setState({grid: board[0]});
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
           if(row === START_NODE_ROW && col === START_NODE_COL){
@@ -102,6 +124,29 @@ export default class PathfindingVisualizer extends Component {
       }
     }
   }
+  // Initialize New Grid
+  initGrid = () => {
+    var grid = [];
+    var nodes = {};
+    for (let row = 0; row < 20; row++) {
+      const tmpRow = [];
+      for (let col = 0; col < 50; col++) {
+        var nodeId = `${row}-${col}`, nodeClass, node;
+        if(row === START_NODE_ROW && col === START_NODE_COL){
+          nodeClass = "node-start";
+          this.start = nodeId;
+        } else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
+          nodeClass = "node-finish";
+          this.target = `${nodeId}`;
+        } else nodeClass = "node"
+        node = newNode(col, row);
+        tmpRow.push(node);
+        nodes[nodeId] = node;
+      }
+      grid.push(tmpRow);
+    }
+    return [grid, nodes];
+  };
 
   render() {
     const {grid, mouseDown, algoFinished} = this.state;
@@ -124,6 +169,9 @@ export default class PathfindingVisualizer extends Component {
                     <Node
                       key={nodeIdx}
                       col={col}
+                      g = {Infinity}
+                      h = {null}
+                      f = {Infinity}
                       isFinish={isFinish}
                       isStart={isStart}
                       isWall={isWall}
@@ -142,18 +190,7 @@ export default class PathfindingVisualizer extends Component {
     );
   }
 }
-// Initialize New Grid
-const initGrid = () => {
-  const grid = [];
-  for (let row = 0; row < 20; row++) {
-    const tmpRow = [];
-    for (let col = 0; col < 50; col++) {
-      tmpRow.push(newNode(col, row));
-    }
-    grid.push(tmpRow);
-  }
-  return grid;
-};
+
 // Create a new Node
 const newNode = (col, row) => {
   return {
@@ -161,10 +198,15 @@ const newNode = (col, row) => {
     row,
     isStart: row === START_NODE_ROW && col === START_NODE_COL,
     isFinish: row === FINISH_NODE_ROW && col === FINISH_NODE_COL,
-    distance: Infinity,
+    g: Infinity,
+    h: null,
+    f: Infinity,
+    prev: null,
     isVisited: false,
     isWall: false,
     previousNode: null,
+    weight: 0,
+    id: `${row}-${col}`
   };
 };
 

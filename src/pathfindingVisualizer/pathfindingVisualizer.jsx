@@ -50,6 +50,9 @@ export default class PathfindingVisualizer extends Component {
   animateSearch(visited, path) {
     if(visited === false){
       console.log("No path found.")
+      this.algoFinished = true;
+      document.getElementById("startButton").disabled = false;
+      document.getElementById("clearGridButton").disabled = false;
     }
     for (let i = 0; i <= visited.length; i++) {
       if (i === visited.length) {

@@ -75,6 +75,9 @@ export default class PathfindingVisualizer extends Component {
           'node node-shortest-path';
       }, 35 * i);
     }
+    this.algoFinished = true;
+    document.getElementById("startButton").disabled = false;
+    document.getElementById("clearGridButton").disabled = false;
   }
 
   visualizeSearch() {
@@ -105,9 +108,6 @@ export default class PathfindingVisualizer extends Component {
         path = getPath(goal);
         this.animateSearch(visited, path);
       }
-      this.algoFinished = true;
-      document.getElementById("startButton").disabled = false;
-      document.getElementById("clearGridButton").disabled = false;
   }
 
   clearGrid() {
@@ -224,6 +224,10 @@ const newNode = (col, row) => {
 const updateGrid = (grid, row, col) => {
   const newGrid = grid.slice();
   const node = newGrid[row][col];
+  if(row === START_NODE_ROW && col === START_NODE_COL 
+    || row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
+    return grid;
+  }
   const newNode = {
     ...node,
    isWall: !node.isWall,
@@ -233,6 +237,10 @@ const updateGrid = (grid, row, col) => {
 };
 
 const updateNodes = (nodes, row, col) => {
+  if(row === START_NODE_ROW && col === START_NODE_COL 
+    || row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
+    return nodes;
+  }
   const newNodes = nodes;
   const node = nodes[`${row}-${col}`];
   const newNode = {

@@ -4,8 +4,11 @@ import './index.css';
 import App from './App';
 
 ReactDOM.render(
+  <div>
   <React.StrictMode>
     <App />
-  </React.StrictMode>,
-  document.getElementById('root')
+  </React.StrictMode>
+  </div>,
+
+  document.getElementById('board')
 );

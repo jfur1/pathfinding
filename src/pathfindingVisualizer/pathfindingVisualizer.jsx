@@ -85,9 +85,13 @@ export default class PathfindingVisualizer extends Component {
 
   visualizeSearch() {
       const algo = document.getElementById("startButton").innerHTML;
-      document.getElementById("startButton").disabled = true;
-      document.getElementById("clearGridButton").disabled = true;
-      console.log(algo);
+      if(algo === "Visualize Algorithm"){
+        console.log("Select an algorithm!");
+      }
+      else{
+        document.getElementById("startButton").disabled = true;
+        document.getElementById("clearGridButton").disabled = true;
+      }
       this.algoFinished = false;
       const {grid, nodes} = this.state;
       const start = grid[START_NODE_ROW][START_NODE_COL];

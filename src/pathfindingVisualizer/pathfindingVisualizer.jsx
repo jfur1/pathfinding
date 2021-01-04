@@ -3,6 +3,7 @@ import Node from './Node/Node';
 import {dijkstra, getPath} from '../algorithms/dijkstra';
 import {astar, getAstarPath} from '../algorithms/astar';
 import './pathfindingVisualizer.css';
+import { nodeName } from 'jquery';
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -31,13 +32,15 @@ export default class PathfindingVisualizer extends Component {
 
   onMouseDown(row, col) {
     const newGrid = updateGrid(this.state.grid, row, col);
-    this.setState({grid: newGrid, mouseDown: true});
+    const newNodes = updateNodes(this.state.nodes, row, col);
+    this.setState({grid: newGrid, nodes: newNodes, mouseDown: true});
   }
 
   onMouseEnter(row, col) {
     if (!this.state.mouseDown) return;
     const newGrid = updateGrid(this.state.grid, row, col);
-    this.setState({grid: newGrid});
+    const newNodes = updateNodes(this.state.nodes, row, col);
+    this.setState({grid: newGrid, nodes: newNodes});
   }
 
   onMouseUp() {
@@ -45,6 +48,9 @@ export default class PathfindingVisualizer extends Component {
   }
 
   animateSearch(visited, path) {
+    if(visited === false){
+      console.log("No path found.")
+    }
     for (let i = 0; i <= visited.length; i++) {
       if (i === visited.length) {
         setTimeout(() => {
@@ -69,9 +75,6 @@ export default class PathfindingVisualizer extends Component {
           'node node-shortest-path';
       }, 35 * i);
     }
-    this.algoFinished = true;
-    document.getElementById("startButton").disabled = false;
-    document.getElementById("clearGridButton").disabled = false;
   }
 
   visualizeSearch() {
@@ -102,22 +105,27 @@ export default class PathfindingVisualizer extends Component {
         path = getPath(goal);
         this.animateSearch(visited, path);
       }
-      
+      this.algoFinished = true;
+      document.getElementById("startButton").disabled = false;
+      document.getElementById("clearGridButton").disabled = false;
   }
 
   clearGrid() {
     if(this.algoFinished){
       const board = this.initGrid();
-      this.setState({grid: board[0]});
+      this.setState({grid: board[0], nodes: board[1]});
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
           if(row === START_NODE_ROW && col === START_NODE_COL){
+            //this.nodes[this.start].status = "start"
             document.getElementById(`node-${row}-${col}`).className = 'node node-start';
           }
           else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-finish';
+            //this.target.status = "target";
           }
           else{
+            //this.nodes[`${row}-${col}`].status = "unvisited";
             document.getElementById(`node-${row}-${col}`).className = 'node';
           }
         }
@@ -132,14 +140,16 @@ export default class PathfindingVisualizer extends Component {
       const tmpRow = [];
       for (let col = 0; col < 50; col++) {
         var nodeId = `${row}-${col}`, nodeClass, node;
+        var node = newNode(col, row);
+
         if(row === START_NODE_ROW && col === START_NODE_COL){
-          nodeClass = "node-start";
-          this.start = nodeId;
-        } else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
-          nodeClass = "node-finish";
-          this.target = `${nodeId}`;
-        } else nodeClass = "node"
-        node = newNode(col, row);
+          node.status = "start"
+        } 
+        else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
+          node.status = "target"
+        } 
+        else node.status = "node"
+
         tmpRow.push(node);
         nodes[nodeId] = node;
       }
@@ -201,7 +211,7 @@ const newNode = (col, row) => {
     g: Infinity,
     h: null,
     f: Infinity,
-    prev: null,
+    status: null,
     isVisited: false,
     isWall: false,
     previousNode: null,
@@ -216,9 +226,20 @@ const updateGrid = (grid, row, col) => {
   const node = newGrid[row][col];
   const newNode = {
     ...node,
-    isWall: !node.isWall,
+   isWall: !node.isWall,
   };
   newGrid[row][col] = newNode;
   return newGrid;
 };
 
+const updateNodes = (nodes, row, col) => {
+  const newNodes = nodes;
+  const node = nodes[`${row}-${col}`];
+  const newNode = {
+    ...node,
+    isWall: !node.isWall,
+  };
+  if(newNode.isWall) newNode.status = "wall";
+  newNodes[`${row}-${col}`] = newNode;
+  return newNodes;
+}

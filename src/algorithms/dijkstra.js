@@ -36,7 +36,7 @@ export function dijkstra(grid, start, goal) {
     const unvisitedNeighbors = getNeighbors(node, grid);
     for (const neighbor of unvisitedNeighbors) {
       neighbor.g = node.g + 1;
-      neighbor.prev = node;
+      neighbor.previousNode = node;
     }
   }
   
@@ -67,7 +67,7 @@ export function dijkstra(grid, start, goal) {
     let tmpNode = goal;
     while (tmpNode !== null) {
       path.unshift(tmpNode);
-      tmpNode = tmpNode.prev;
+      tmpNode = tmpNode.previousNode;
     }
     return path;
   }

@@ -18,12 +18,12 @@ export function astar(nodes, start, goal, explored, grid, heuristic){
         // Pop the next closest node off the frontier
         let node = closestNode(nodes, frontier);
         // Make sure the node is not a wall
-        while(node.className === "node node-wall" && frontier.length){
+        while(node.status === "wall"  && frontier.length){
             node = closestNode(nodes, frontier);
         }
         if(node.g === Infinity) return false;
         explored.push(node);
-        node.className = "node node-visited";
+        node.status = "visited"
         if(node.id === goal.id) return explored;
 
         updateNeighbors(nodes, node, grid, start, goal, heuristic);
@@ -87,20 +87,20 @@ function getNeighbors(id, nodes, grid){
     // North
     if(grid[x-1] && grid[x-1][y]){
         neighbor = `${(x-1).toString()}-${y.toString()}`;
-        if(nodes[neighbor].className !== "node node-wall") neighbors.push(neighbor);
+        if(nodes[neighbor].status !== "wall") neighbors.push(neighbor);
     }
     // South
     if(grid[x+1] && grid[x+1][y]){
         neighbor = `${(x+1).toString()}-${y.toString()}`;
-        if(nodes[neighbor].className !== "node node-wall") neighbors.push(neighbor);
+        if(nodes[neighbor].status !== "wall") neighbors.push(neighbor);
     }
     if(grid[x][y-1]){
         neighbor = `${x.toString()}-${(y - 1).toString()}`;
-        if(nodes[neighbor].className !== "node node-wall") neighbors.push(neighbor);
+        if(nodes[neighbor].status !== "wall") neighbors.push(neighbor);
     }
     if(grid[x][y+1]){
         neighbor = `${x.toString()}-${(y + 1).toString()}`;
-        if(nodes[neighbor].className !== "node node-wall") neighbors.push(neighbor);
+        if(nodes[neighbor].status !== "wall") neighbors.push(neighbor);
     }
     return neighbors;
 }

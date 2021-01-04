@@ -17,7 +17,7 @@ export default class Node extends Component {
       f,
       direction,
       weight,
-      prev
+      status
     } = this.props;
     const type = isFinish
       ? 'node-finish'

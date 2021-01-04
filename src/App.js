@@ -4,10 +4,7 @@ import Navbar from './navbar';
 
 function App() {
   return ( 
-    <div>
-
       <PathfindingVisualizer></PathfindingVisualizer>
-    </div>
   );
 }
 

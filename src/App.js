@@ -5,10 +5,10 @@ import Navbar from './navbar';
 
 function App() {
   return (    
-    <div className="Navbar"><Navbar/>
     <div className="App">
+      <Navbar></Navbar>
       <PathfindingVisualizer></PathfindingVisualizer>
-    </div> </div>
+    </div>
   );
 }
 

@@ -163,9 +163,11 @@ export default class PathfindingVisualizer extends Component {
 
   render() {
     const {grid, mouseDown, algoFinished} = this.state;
-    
+    let tableHTML = "";
     return (
       <>
+        
+        <div class="board">
         <div class="center">
           <button id="startButton" onClick={() => this.visualizeSearch()}>Visualize Algorithm</button>
         </div>
@@ -193,11 +195,13 @@ export default class PathfindingVisualizer extends Component {
                       onMouseEnter={(row, col) => this.onMouseEnter(row, col)}
                       onMouseUp={() => this.onMouseUp()}
                       row={row}></Node>
+                      
                   );
                 })}
               </div>
             );
           })}
+        </div>
         </div>
       </>
     );

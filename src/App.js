@@ -6,6 +6,7 @@ import Navbar from './navbar';
 function App() {
   return (    
     <div className="App">
+      <Navbar/>
       <PathfindingVisualizer></PathfindingVisualizer>
     </div> 
   );

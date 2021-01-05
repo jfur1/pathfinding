@@ -5,11 +5,12 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
     let visited = {start: true};
     while(structure.length){
         let node = algoName === "bfs" ? structure.shift() : structure.pop();
-        explored.push(node);
+        
         if(algoName === "dfs"){
             visited[node.id] = true;
         }
-        node.status = "visited";
+        node.isVisited = true;
+        explored.push(node);
         if(node.id === target.id){
             return explored;
         }
@@ -19,7 +20,7 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
                if(algoName === "bfs"){
                    visited[neighbor] = true;
                }
-               explored[neighbor].previousNode = node;
+               nodes[neighbor].previousNode = node;
                structure.push(nodes[neighbor]);
            } 
         });

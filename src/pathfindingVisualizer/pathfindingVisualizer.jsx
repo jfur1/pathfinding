@@ -118,17 +118,24 @@ export default class PathfindingVisualizer extends Component {
         console.log("Dijkstra Visited:", visited);
         console.log("Dijkstra Path:", path);
         this.animateSearch(visited, path);
-      }else if(algo === "Depth-First-Search"){
-        visited = unweightedSearch(nodes, start, goal, visited, grid, "dfs");
+      // }else if(algo === "Depth-First-Search"){
+      //   visited = unweightedSearch(nodes, start, goal, visited, grid, "dfs");
+      //   path = getPath(goal);
+      //   console.log("DFS Visited:", visited);
+      //   console.log("DFS Path:", path);
+      //   this.animateSearch(visited, path);
+      // }else if(algo === "Breadth-First-Search"){
+      //   visited = unweightedSearch(nodes, start, goal, visited, grid, "bfs");
+      //   path = getPath(goal);
+      //   console.log("BFS Visited:", visited);
+      //   console.log("BFS Path:", path);
+      //   this.animateSearch(visited, path);
+      // }
+      else{
+        visited = unweightedSearch(nodes, start, goal, visited, grid, algo);
         path = getPath(goal);
-        console.log("DFS Visited:", visited);
-        console.log("DFS Path:", path);
-        this.animateSearch(visited, path);
-      }else if(algo === "Breadth-First-Search"){
-        visited = unweightedSearch(nodes, start, goal, visited, grid, "bfs");
-        path = getPath(goal);
-        console.log("BFS Visited:", visited);
-        console.log("BFS Path:", path);
+        console.log(algo, "Visited:", visited);
+        console.log(algo, "Path:", path);
         this.animateSearch(visited, path);
       }
       return;

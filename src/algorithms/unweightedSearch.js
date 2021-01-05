@@ -11,7 +11,7 @@ export function unweightedSearch(nodes, start, target, nodesToAnimate, grid, alg
         }
         node.status = "visited";
         if(node.id === target.id){
-            return visited;
+            return true;
         }
         let neighbors = getNeighbors(node.id, nodes, grid, algoName);
         neighbors.forEach(neighbor => {

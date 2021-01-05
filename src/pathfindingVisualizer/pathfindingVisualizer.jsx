@@ -82,7 +82,6 @@ export default class PathfindingVisualizer extends Component {
     this.algoFinished = true;
     document.getElementById("startButton").disabled = false;
     document.getElementById("clearGridButton").disabled = false;
-    return;
   }
 
   visualizeSearch() {
@@ -138,7 +137,6 @@ export default class PathfindingVisualizer extends Component {
       //   console.log(algo, "Path:", path);
       //   this.animateSearch(visited, path);
       // }
-      return;
   }
 
   clearGrid() {

@@ -23,7 +23,7 @@ export function astar(nodes, start, goal, explored, grid, heuristic){
         }
         if(node.g === Infinity) return false;
         explored.push(node);
-        node.status = "visited"
+        node.status = "visited";
         if(node.id === goal.id) return explored;
 
         updateNeighbors(nodes, node, grid, start, goal, heuristic);

@@ -6,7 +6,9 @@ export function unweightedSearch(nodes, start, target, nodesToAnimate, grid, alg
     while(structure.length){
         let node = algoName === "bfs" ? structure.shift() : structure.pop();
         nodesToAnimate.push(node);
-        if(algoName === "dfs") visited[node.id] = true;
+        if(algoName === "dfs"){
+            visited[node.id] = true;
+        }
         node.status = "visited";
         if(node.id === target){
             return true;

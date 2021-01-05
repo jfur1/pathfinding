@@ -3,7 +3,7 @@ import Node from './Node/Node';
 import {dijkstra, getPath} from '../algorithms/dijkstra';
 import {astar, getAstarPath} from '../algorithms/astar';
 import './pathfindingVisualizer.css';
-import {unweightedSearch, getNeighbors} from '../algorithms/unweightedSearch';
+import {unweightedSearch} from '../algorithms/unweightedSearch';
 import { nodeName } from 'jquery';
 
 const START_NODE_ROW = 10;
@@ -101,7 +101,7 @@ export default class PathfindingVisualizer extends Component {
       var path = [];
       // Select algo based on start button text
       if(algo === "A* Search"){
-        console.log(nodes)
+        console.log(nodes);
         // console.log("start:", start)
         // console.log("start-id:", start.id)
         // console.log("goal:", goal)

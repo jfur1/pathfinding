@@ -2,7 +2,7 @@ export function unweightedSearch(nodes, start, target, visited, grid, algoName){
     if(!start || !target || start === target)
         return false;
     let structure = [nodes[start]];
-    let explored = {start: true};
+    let visited = {start: true};
     while(structure.length){
         let node = algoName === "bfs" ? structure.shift() : structure.pop();
         visited.push(node);
@@ -23,7 +23,7 @@ export function unweightedSearch(nodes, start, target, visited, grid, algoName){
     return false;
 }
 
-export function getNeighbors(id, nodes, grid, algoName){
+function getNeighbors(id, nodes, grid, algoName){
     let coords = id.split("-");
     let x = parseInt(coords[0]);
     let y = parseInt(coords[1]);

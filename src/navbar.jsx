@@ -13,14 +13,12 @@ export default class Navbar extends Component{
     }
     
     toggleDropdown(){
-        
         document.getElementById("myDropdown").classList.toggle("show");
     }
 
-    selectAlgo(id){
+    selectAlgo(algoName){
         this.toggleDropdown();
-        document.getElementById("startButton").innerHTML = id;
-        return;
+        document.getElementById("startButton").innerHTML = algoName;
     }
 
     render(){

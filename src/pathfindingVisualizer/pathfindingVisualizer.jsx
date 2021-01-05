@@ -160,7 +160,6 @@ export default class PathfindingVisualizer extends Component {
         }
       }
     }
-    return;
   }
   // Initialize New Grid
   initGrid = () => {

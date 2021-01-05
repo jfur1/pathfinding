@@ -82,6 +82,7 @@ export default class PathfindingVisualizer extends Component {
     this.algoFinished = true;
     document.getElementById("startButton").disabled = false;
     document.getElementById("clearGridButton").disabled = false;
+    return;
   }
 
   visualizeSearch() {
@@ -107,25 +108,27 @@ export default class PathfindingVisualizer extends Component {
         // console.log("goal:", goal)
         visited = astar(nodes, start, goal, visited, grid, []);
         path = getAstarPath(goal);
-        console.log("Visited:", visited);
-        console.log("Path:", path);
+        console.log("Astar Visited:", visited);
+        console.log("Astar Path:", path);
         this.animateSearch(visited, path);
       }
       else if(algo === "Dijkstra's Algorithm"){
         visited = dijkstra(grid, start, goal);
         path = getPath(goal);
+        console.log("Dijkstra Visited:", visited);
+        console.log("Dijkstra Path:", path);
         this.animateSearch(visited, path);
       }else if(algo === "Depth-First-Search"){
         visited = unweightedSearch(nodes, start, goal, visited, grid, "dfs");
         path = getPath(goal);
-        console.log("Visited:", visited);
-        console.log("Path:", path);
+        console.log("DFS Visited:", visited);
+        console.log("DFS Path:", path);
         this.animateSearch(visited, path);
       }else if(algo === "Breadth-First-Search"){
         visited = unweightedSearch(nodes, start, goal, visited, grid, "bfs");
         path = getPath(goal);
-        console.log("Visited:", visited);
-        console.log("Path:", path);
+        console.log("BFS Visited:", visited);
+        console.log("BFS Path:", path);
         this.animateSearch(visited, path);
       }
   }

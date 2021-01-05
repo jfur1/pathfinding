@@ -3,6 +3,7 @@ import Node from './Node/Node';
 import {dijkstra, getPath} from '../algorithms/dijkstra';
 import {astar, getAstarPath} from '../algorithms/astar';
 import './pathfindingVisualizer.css';
+import {unweightedSearch, getNeighbors} from '../algorithms/unweightedSearch';
 import { nodeName } from 'jquery';
 
 const START_NODE_ROW = 10;
@@ -112,6 +113,14 @@ export default class PathfindingVisualizer extends Component {
       }
       else if(algo === "Dijkstra's Algorithm"){
         visited = dijkstra(grid, start, goal);
+        path = getPath(goal);
+        this.animateSearch(visited, path);
+      }else if(algo === "Depth-First-Search"){
+        visited = unweightedSearch(nodes, start, goal, visited, grid, "dfs");
+        path = getPath(goal);
+        this.animateSearch(visited, path);
+      }else if(algo === "Breadth-First-Search"){
+        visited = unweightedSearch(nodes, start, goal, visited, grid, "bfs");
         path = getPath(goal);
         this.animateSearch(visited, path);
       }

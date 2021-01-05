@@ -24,9 +24,23 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
                structure.push(nodes[neighbor]);
            } 
         });
+        //updateNeighborsUnweighted(node, nodes, grid, visited, algoName);
     }
     return false;
 }
+
+// function updateNeighborsUnweighted(node, nodes, grid, visited, algoName){
+//     const neighbors = getNeighbors(node.id, nodes, grid, algoName);
+//     for(const neighbor of neighbors){
+//         neighbor.previousNode = node;
+//         if(!visited[neighbor]){
+//             if(algoName === "bfs"){
+//                 node.isVisited;
+//             }
+//             nodes[neigh]
+//         }
+//     }
+// }
 
 function getNeighbors(id, nodes, grid, algoName){
     let coords = id.split("-");

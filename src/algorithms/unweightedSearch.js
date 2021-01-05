@@ -1,15 +1,15 @@
-export function unweightedSearch(nodes, start, target, visited, grid, algoName){
+export function unweightedSearch(nodes, start, target, nodesToAnimate, grid, algoName){
     if(!start || !target || start === target)
         return false;
     let structure = [nodes[start]];
     let visited = {start: true};
     while(structure.length){
         let node = algoName === "bfs" ? structure.shift() : structure.pop();
-        visited.push(node);
+        nodesToAnimate.push(node);
         if(algoName === "dfs") visited[node.id] = true;
         node.status = "visited";
         if(node.id === target){
-            return visited;
+            return true;
         }
         let neighbors = getNeighbors(node.id, nodes, grid, algoName);
         neighbors.forEach(neighbor => {

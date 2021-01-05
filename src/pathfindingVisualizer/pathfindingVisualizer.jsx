@@ -111,6 +111,7 @@ export default class PathfindingVisualizer extends Component {
         console.log("Astar Visited:", visited);
         console.log("Astar Path:", path);
         this.animateSearch(visited, path);
+        return;
       }
       else if(algo === "Dijkstra's Algorithm"){
         visited = dijkstra(grid, start, goal);
@@ -118,19 +119,23 @@ export default class PathfindingVisualizer extends Component {
         console.log("Dijkstra Visited:", visited);
         console.log("Dijkstra Path:", path);
         this.animateSearch(visited, path);
+        return;
       }else if(algo === "Depth-First-Search"){
         visited = unweightedSearch(nodes, start, goal, visited, grid, "dfs");
         path = getPath(goal);
         console.log("DFS Visited:", visited);
         console.log("DFS Path:", path);
         this.animateSearch(visited, path);
+        return;
       }else if(algo === "Breadth-First-Search"){
         visited = unweightedSearch(nodes, start, goal, visited, grid, "bfs");
         path = getPath(goal);
         console.log("BFS Visited:", visited);
         console.log("BFS Path:", path);
         this.animateSearch(visited, path);
+        return;
       }
+      return;
   }
 
   clearGrid() {
@@ -154,6 +159,7 @@ export default class PathfindingVisualizer extends Component {
         }
       }
     }
+    return;
   }
   // Initialize New Grid
   initGrid = () => {

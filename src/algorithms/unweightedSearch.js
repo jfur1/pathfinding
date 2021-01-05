@@ -1,4 +1,4 @@
-function unweightedSearch(nodes, start, target, visited, grid, algoName){
+export function unweightedSearch(nodes, start, target, visited, grid, algoName){
     if(!start || !target || start === target)
         return false;
     let structure = [nodes[start]];
@@ -23,7 +23,7 @@ function unweightedSearch(nodes, start, target, visited, grid, algoName){
     return false;
 }
 
-function getNeighbors(id, nodes, grid, algoName){
+export function getNeighbors(id, nodes, grid, algoName){
     let coords = id.split("-");
     let x = parseInt(coords[0]);
     let y = parseInt(coords[1]);
@@ -40,5 +40,3 @@ function getNeighbors(id, nodes, grid, algoName){
         }
     }
 }
-
-module.exports = unweightedSearch;

@@ -10,7 +10,7 @@ export function unweightedSearch(nodes, start, target, nodesToAnimate, grid, alg
             visited[node.id] = true;
         }
         node.status = "visited";
-        if(node.id === target){
+        if(node.id === target.id){
             return true;
         }
         let neighbors = getNeighbors(node.id, nodes, grid, algoName);

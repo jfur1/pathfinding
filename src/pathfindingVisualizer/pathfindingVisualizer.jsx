@@ -118,10 +118,14 @@ export default class PathfindingVisualizer extends Component {
       }else if(algo === "Depth-First-Search"){
         visited = unweightedSearch(nodes, start, goal, visited, grid, "dfs");
         path = getPath(goal);
+        console.log("Visited:", visited);
+        console.log("Path:", path);
         this.animateSearch(visited, path);
       }else if(algo === "Breadth-First-Search"){
         visited = unweightedSearch(nodes, start, goal, visited, grid, "bfs");
         path = getPath(goal);
+        console.log("Visited:", visited);
+        console.log("Path:", path);
         this.animateSearch(visited, path);
       }
   }

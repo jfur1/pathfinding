@@ -41,4 +41,35 @@ function getNeighbors(id, nodes, grid, algoName){
             }
         }
     }
+    if(grid[x][y+1]){
+        neighbor = `${x.toString()}-${(y + 1).toString()}`;
+        if(nodes[neighbor].status !== "wall"){
+            if(algoName === "bfs"){
+                neighbors.push(neighbor);
+            }else{
+                neighbors.unshift(neighbor);
+            }
+        }
+    }
+    if(grid[x+1] && grid[x+1][y]){
+        neighbor = `${(x + 1).toString()}-${y.toString()}`;
+        if(nodes[neighbor].status !== "wall"){
+            if(algoName === "bfs"){
+                neighbors.push(neighbor);
+            }else{
+                neighbors.unshift(neighbor);
+            }
+        }
+    }
+    if(grid[x][y-1]){
+        neighbor = `${x.toString()}-${(y - 1).toString()}`;
+        if(nodes[neighbor].status !== "wall"){
+            if(algoName === "bfs"){
+                neighbors.push(neighbor);
+            }else{
+                neighbors.unshift(neighbor);
+            }
+        }
+    }
+    return neighbors;
 }

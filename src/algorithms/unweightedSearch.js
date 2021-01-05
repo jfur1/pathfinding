@@ -19,7 +19,7 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
                if(algoName === "bfs"){
                    visited[neighbor] = true;
                }
-               nodes[neighbor].previousNode = node;
+               nodes[neighbor].previousNode = node.id;
                structure.push(nodes[neighbor]);
            } 
         });

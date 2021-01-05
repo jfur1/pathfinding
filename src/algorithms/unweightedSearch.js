@@ -21,6 +21,7 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
            if(!visited[neighbor]){
                if(algoName === "bfs"){
                    visited[neighbor] = true;
+                   console.log("BFS Visited:", visited);
                }
                nodes[neighbor].previousNode = node;
                structure.push(nodes[neighbor]);

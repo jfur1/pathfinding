@@ -1,11 +1,11 @@
-export function unweightedSearch(nodes, start, target, nodesToAnimate, grid, algoName){
+export function unweightedSearch(nodes, start, target, explored, grid, algoName){
     if(!start || !target || start === target)
         return false;
-    let structure = [nodes[start]];
+    let structure = [nodes[start.id]];
     let visited = {start: true};
     while(structure.length){
         let node = algoName === "bfs" ? structure.shift() : structure.pop();
-        nodesToAnimate.push(node);
+        explored.push(node);
         if(algoName === "dfs"){
             visited[node.id] = true;
         }

@@ -1,7 +1,7 @@
 export function unweightedSearch(nodes, start, target, nodesToAnimate, grid, algoName){
     if(!start || !target || start === target)
         return false;
-    let structure = [nodes[start.id]];
+    let structure = [nodes[start]];
     let visited = {start: true};
     while(structure.length){
         let node = algoName === "bfs" ? structure.shift() : structure.pop();
@@ -16,7 +16,9 @@ export function unweightedSearch(nodes, start, target, nodesToAnimate, grid, alg
         let neighbors = getNeighbors(node.id, nodes, grid, algoName);
         neighbors.forEach(neighbor => {
            if(!visited[neighbor]){
-               if(algoName === "bfs") visited[neighbor] = true;
+               if(algoName === "bfs"){
+                   visited[neighbor] = true;
+               }
                nodes[neighbor].previousNode = node;
                structure.push(nodes[neighbor]);
            } 

@@ -5,12 +5,14 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
     let visited = {start: true};
     while(structure.length){
         let node = algoName === "bfs" ? structure.shift() : structure.pop();
+        explored.push(node);
         
         if(algoName === "dfs"){
             visited[node.id] = true;
         }
         node.isVisited = true;
-        explored.push(node);
+        node.status = "visited";
+
         if(node.id === target.id){
             return explored;
         }

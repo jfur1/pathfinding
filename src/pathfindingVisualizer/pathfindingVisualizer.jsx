@@ -210,7 +210,7 @@ export default class PathfindingVisualizer extends Component {
           <button id="startButton" onClick={() => this.visualizeSearch()}>Visualize Algorithm</button>
         </div>
         <div class="center">
-          <button id="clearGridButton" onClick={() => this.clearGrid(reset=true)}>Reset Grid</button>
+          <button id="clearGridButton" onClick={() => this.clearGrid(true)}>Reset Grid</button>
         </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {

@@ -197,7 +197,7 @@ export default class PathfindingVisualizer extends Component {
       }
       grid.push(tmpRow);
     }
-    //return [grid, nodes];
+    return [grid, nodes];
   };
 
   render() {

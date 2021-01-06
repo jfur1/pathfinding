@@ -32,16 +32,18 @@ export default class PathfindingVisualizer extends Component {
   }
 
   onMouseDown(row, col) {
-    const newGrid = updateGrid(this.state.grid, row, col);
-    const newNodes = updateNodes(this.state.nodes, row, col);
-    this.setState({grid: newGrid, nodes: newNodes, mouseDown: true});
+    // const newGrid = updateGrid(this.state.grid, row, col);
+    // const newNodes = updateNodes(this.state.nodes, row, col);
+    const board = updateBoard(this.state.grid, this.state.nodes, row, col);
+    this.setState({grid: board[0], nodes: board[1], mouseDown: true});
   }
 
   onMouseEnter(row, col) {
     if (!this.state.mouseDown) return;
-    const newGrid = updateGrid(this.state.grid, row, col);
-    const newNodes = updateNodes(this.state.nodes, row, col);
-    this.setState({grid: newGrid, nodes: newNodes});
+    // const newGrid = updateGrid(this.state.grid, row, col);
+    // const newNodes = updateNodes(this.state.nodes, row, col);
+    const board = updateBoard(this.state.grid, this.state.nodes, row, col);
+    this.setState({grid: board[0], nodes: board[1]});
   }
 
   onMouseUp() {
@@ -249,34 +251,60 @@ const newNode = (col, row) => {
   };
 };
 
+// // Update our grid state
+// const updateGrid = (grid, row, col) => {
+//   const newGrid = grid.slice();
+//   const node = newGrid[row][col];
+//   if(row === START_NODE_ROW && col === START_NODE_COL 
+//     || row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
+//     return grid;
+//   }
+//   const newNode = {
+//     ...node,
+//    isWall: !node.isWall,
+//   };
+//   newGrid[row][col] = newNode;
+//   return newGrid;
+// };
+
+// const updateNodes = (nodes, row, col) => {
+//   if(row === START_NODE_ROW && col === START_NODE_COL 
+//     || row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
+//     return nodes;
+//   }
+//   const newNodes = nodes;
+//   const node = nodes[`${row}-${col}`];
+//   const newNode = {
+//     ...node,
+//     isWall: !node.isWall,
+//   };
+//   if(newNode.isWall) newNode.status = "wall";
+//   newNodes[`${row}-${col}`] = newNode;
+//   return newNodes;
+// }
+
 // Update our grid state
-const updateGrid = (grid, row, col) => {
+const updateBoard = (grid, nodes, row, col) => {
+  // Create copies of grid & nodes
   const newGrid = grid.slice();
-  const node = newGrid[row][col];
+  const newNodes = nodes;
+  // If start/goal node, continue
   if(row === START_NODE_ROW && col === START_NODE_COL 
     || row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
-    return grid;
+    return [grid, nodes];
   }
+  // Get the node in question
+  const node = nodes[`${row}-${col}`];
+  // Create a new node with prop "isWall" toggled
   const newNode = {
     ...node,
    isWall: !node.isWall,
   };
-  newGrid[row][col] = newNode;
-  return newGrid;
-};
-
-const updateNodes = (nodes, row, col) => {
-  if(row === START_NODE_ROW && col === START_NODE_COL 
-    || row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
-    return nodes;
-  }
-  const newNodes = nodes;
-  const node = nodes[`${row}-${col}`];
-  const newNode = {
-    ...node,
-    isWall: !node.isWall,
-  };
+  // Set status to wall if .isWall === true
   if(newNode.isWall) newNode.status = "wall";
+  // Update the new node in the grid & nodes sets, then return to be updated as state
   newNodes[`${row}-${col}`] = newNode;
-  return newNodes;
-}
+  newGrid[row][col] = newNode;
+
+  return [newGrid, newNodes];
+};

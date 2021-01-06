@@ -51,7 +51,7 @@ export default class PathfindingVisualizer extends Component {
   }
 
   animateSearch(visited, path) {
-    if(visited === false || path.length === 1){
+    if(visited === false || path.length === 1 || visited.length === 1){
       console.log("No path found.")
       this.algoFinished = true;
       document.getElementById("startButton").disabled = false;

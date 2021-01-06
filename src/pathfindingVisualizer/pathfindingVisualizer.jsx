@@ -230,7 +230,6 @@ export default class PathfindingVisualizer extends Component {
     );
   }
 }
-
 // Create a new Node
 const newNode = (col, row) => {
   return {
@@ -249,7 +248,6 @@ const newNode = (col, row) => {
     id: `${row}-${col}`
   };
 };
-
 // Update our grid state
 const updateBoard = (grid, nodes, row, col) => {
   // Create copies of grid & nodes

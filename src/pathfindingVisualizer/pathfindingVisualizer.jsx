@@ -94,10 +94,10 @@ export default class PathfindingVisualizer extends Component {
       }
       else{
         console.log("Selected Algorithm:", algo);
-        
+        // Clear any visited nodes from the grid
+        this.clearGrid();
         document.getElementById("startButton").disabled = true;
         document.getElementById("clearGridButton").disabled = true;
-      
       
         this.algoFinished = false;
 
@@ -139,11 +139,9 @@ export default class PathfindingVisualizer extends Component {
         }
       }
   }
-
+  // Same as init grid, exept walls & start/goal nodes are kept
   clearGrid() {
     if(this.algoFinished){
-      const board = this.initGrid();
-      this.setState({grid: board[0], nodes: board[1]});
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
           if(row === START_NODE_ROW && col === START_NODE_COL){
@@ -152,7 +150,10 @@ export default class PathfindingVisualizer extends Component {
           else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-finish';
           }
-          else{
+          else if(document.getElementById(`node-${row}-${col}`).className === "node node-visited"){
+            document.getElementById(`node-${row}-${col}`).className = 'node';
+          }
+          else if(document.getElementById(`node-${row}-${col}`).className === "node node-shortest-path"){
             document.getElementById(`node-${row}-${col}`).className = 'node';
           }
         }
@@ -190,13 +191,12 @@ export default class PathfindingVisualizer extends Component {
     let tableHTML = "";
     return (
       <>
-        
         <div class="board">
         <div class="center">
           <button id="startButton" onClick={() => this.visualizeSearch()}>Visualize Algorithm</button>
         </div>
         <div class="center">
-          <button id="clearGridButton" onClick={() => this.clearGrid()}>Clear Grid</button>
+          <button id="clearGridButton" onClick={() => this.initGrid()}>Reset Grid</button>
         </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {
@@ -219,7 +219,6 @@ export default class PathfindingVisualizer extends Component {
                       onMouseEnter={(row, col) => this.onMouseEnter(row, col)}
                       onMouseUp={() => this.onMouseUp()}
                       row={row}></Node>
-                      
                   );
                 })}
               </div>
@@ -249,36 +248,6 @@ const newNode = (col, row) => {
     id: `${row}-${col}`
   };
 };
-// // Update our grid state
-// const updateGrid = (grid, row, col) => {
-//   const newGrid = grid.slice();
-//   const node = newGrid[row][col];
-//   if(row === START_NODE_ROW && col === START_NODE_COL 
-//     || row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
-//     return grid;
-//   }
-//   const newNode = {
-//     ...node,
-//    isWall: !node.isWall,
-//   };
-//   newGrid[row][col] = newNode;
-//   return newGrid;
-// };
-// const updateNodes = (nodes, row, col) => {
-//   if(row === START_NODE_ROW && col === START_NODE_COL 
-//     || row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
-//     return nodes;
-//   }
-//   const newNodes = nodes;
-//   const node = nodes[`${row}-${col}`];
-//   const newNode = {
-//     ...node,
-//     isWall: !node.isWall,
-//   };
-//   if(newNode.isWall) newNode.status = "wall";
-//   newNodes[`${row}-${col}`] = newNode;
-//   return newNodes;
-// }
 // Update our grid state
 const updateBoard = (grid, nodes, row, col) => {
   // Create copies of grid & nodes
@@ -290,7 +259,7 @@ const updateBoard = (grid, nodes, row, col) => {
     return [grid, nodes];
   }
   // Get the node in question
-  const node = nodes[`${row}-${col}`];
+  const node = newGrid[row][col];
   // Create a new node with prop "isWall" toggled
   const newNode = {
     ...node,
@@ -298,6 +267,7 @@ const updateBoard = (grid, nodes, row, col) => {
   };
   // Set status to wall if .isWall === true
   if(newNode.isWall) newNode.status = "wall";
+  else newNode.status = "node";
   // Update the new node in the grid & nodes sets, then return to be updated as state
   newNodes[`${row}-${col}`] = newNode;
   newGrid[row][col] = newNode;

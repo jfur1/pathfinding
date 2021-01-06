@@ -9,7 +9,7 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
         explored.push(node);
         
         if(algoName === "dfs"){
-            visited[node] = true;
+            visited[node.id] = true;
         }
         node.isVisited = true;
 

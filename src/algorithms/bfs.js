@@ -8,30 +8,31 @@ export function bfs(grid, start, goal){
         if(!node.isWall && (node.id === start.id)){
             node.isVisited = true;
             stack.push(node);
+            const {col, row} = node;
             let nextNode;
-            if(node.row > 0){
-                nextNode = grid[node.row-1][node.col];
+            if(row > 0){
+                nextNode = grid[row-1][col];
                 if(!nextNode.isVisited){
                     nextNode.previousNode = node;
                     stack.push(nextNode);
                 }
             }
             if(node.row < grid.length - 1){
-                nextNode = grid[node.row+1][node.col];
+                nextNode = grid[row+1][col];
                 if(!nextNode.isVisited){
                     nextNode.previousNode = node;
                     stack.push(nextNode);
                 }
             }
-            if(node.col > 0){
-                nextNode = grid[node.row][node.col-1];
+            if(col > 0){
+                nextNode = grid[row][col-1];
                 if(!nextNode.isVisited){
                     nextNode.previousNode = node;
                     stack.push(nextNode);
                 }
             }
-            if(node.col < grid[0].length-1){
-                nextNode = grid[node.row][node.col+1];
+            if(col < grid[0].length-1){
+                nextNode = grid[row][col+1];
                 if(!nextNode.isVisited){
                     nextNode.previousNode = node;
                     stack.push(nextNode);

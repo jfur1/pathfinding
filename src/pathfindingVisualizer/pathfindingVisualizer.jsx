@@ -90,11 +90,14 @@ export default class PathfindingVisualizer extends Component {
         console.log("Select an algorithm!");
         return;
       }
-      document.getElementById("startButton").disabled = true;
-      document.getElementById("clearGridButton").disabled = true;
+      else{
+        console.log("Selected Algorithm:", algo);
+        document.getElementById("startButton").disabled = true;
+        document.getElementById("clearGridButton").disabled = true;
+      }
       
       this.algoFinished = false;
-      var {grid, nodes} = this.state;
+      const {grid, nodes} = this.state;
       const start = grid[START_NODE_ROW][START_NODE_COL];
       const goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
       var visited = [];

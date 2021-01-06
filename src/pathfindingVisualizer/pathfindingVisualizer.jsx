@@ -3,7 +3,7 @@ import Node from './Node/Node';
 import {dijkstra, getPath} from '../algorithms/dijkstra';
 import {astar, getAstarPath} from '../algorithms/astar';
 import './pathfindingVisualizer.css';
-import {unweightedSearch} from '../algorithms/unweightedSearch';
+import {dfs} from '../algorithms/dfs';
 import { bfs } from '../algorithms/bfs';
 
 const START_NODE_ROW = 10;
@@ -92,11 +92,13 @@ export default class PathfindingVisualizer extends Component {
       }
       else{
         console.log("Selected Algorithm:", algo);
+        
         document.getElementById("startButton").disabled = true;
         document.getElementById("clearGridButton").disabled = true;
       
       
         this.algoFinished = false;
+
         const {grid, nodes} = this.state;
         const start = grid[START_NODE_ROW][START_NODE_COL];
         const goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
@@ -121,7 +123,7 @@ export default class PathfindingVisualizer extends Component {
           console.log("Dijkstra Path:", path);
           this.animateSearch(visited, path);
         }else if(algo === "Depth-First-Search"){
-          visited = unweightedSearch(nodes, start, goal, visited, grid, "dfs");
+          visited = dfs(grid, start, goal);
           path = getPath(goal);
           console.log("DFS Visited:", visited);
           console.log("DFS Path:", path);
@@ -134,13 +136,6 @@ export default class PathfindingVisualizer extends Component {
           this.animateSearch(visited, path);
         }
       }
-      // else{
-      //   visited = unweightedSearch(nodes, start, goal, visited, grid, algo);
-      //   path = getPath(goal);
-      //   console.log(algo, "Visited:", visited);
-      //   console.log(algo, "Path:", path);
-      //   this.animateSearch(visited, path);
-      // }
   }
 
   clearGrid() {
@@ -150,15 +145,12 @@ export default class PathfindingVisualizer extends Component {
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
           if(row === START_NODE_ROW && col === START_NODE_COL){
-            //this.nodes[this.start].status = "start"
             document.getElementById(`node-${row}-${col}`).className = 'node node-start';
           }
           else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-finish';
-            //this.target.status = "target";
           }
           else{
-            //this.nodes[`${row}-${col}`].status = "unvisited";
             document.getElementById(`node-${row}-${col}`).className = 'node';
           }
         }

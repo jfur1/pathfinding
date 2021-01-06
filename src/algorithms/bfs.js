@@ -5,7 +5,7 @@ export function bfs(grid, start, goal){
         const node = stack.shift();
         if(node.id === goal.id) return visited;
 
-        if(!node.isWall && (node.id === start.id)){
+        if(!node.isWall && (node.isStart || !node.isVisited)){
             node.isVisited = true;
             visited.push(node);
             const {col, row} = node;
@@ -17,7 +17,7 @@ export function bfs(grid, start, goal){
                     stack.push(nextNode);
                 }
             }
-            if(node.row < grid.length - 1){
+            if(row < grid.length - 1){
                 nextNode = grid[row+1][col];
                 if(!nextNode.isVisited){
                     nextNode.previousNode = node;

@@ -7,7 +7,7 @@ export function bfs(grid, start, goal){
 
         if(!node.isWall && (node.id === start.id)){
             node.isVisited = true;
-            stack.push(node);
+            visited.push(node);
             const {col, row} = node;
             let nextNode;
             if(row > 0){

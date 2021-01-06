@@ -49,12 +49,6 @@ export default class PathfindingVisualizer extends Component {
   }
 
   animateSearch(visited, path) {
-    if(visited === []){
-      console.log("No path found.")
-      this.algoFinished = true;
-      document.getElementById("startButton").disabled = false;
-      document.getElementById("clearGridButton").disabled = false;
-    }
     for (let i = 0; i <= visited.length; i++) {
       if (i === visited.length) {
         setTimeout(() => {
@@ -72,17 +66,24 @@ export default class PathfindingVisualizer extends Component {
   }
 
   animatePath(path) {
-    for (let i = 0; i < path.length; i++) {
-      setTimeout(() => {
-        const node = path[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-shortest-path';
-      }, 35 * i);
+    if(path.length === 1){
+      console.log("No path found.")
+      this.algoFinished = true;
+      document.getElementById("startButton").disabled = false;
+      document.getElementById("clearGridButton").disabled = false;
+    }else{
+        for (let i = 0; i < path.length; i++) {
+          setTimeout(() => {
+            const node = path[i];
+            document.getElementById(`node-${node.row}-${node.col}`).className =
+              'node node-shortest-path';
+          }, 35 * i);
+        }
+        this.algoFinished = true;
+        document.getElementById("startButton").disabled = false;
+        document.getElementById("clearGridButton").disabled = false;
+      }
     }
-    this.algoFinished = true;
-    document.getElementById("startButton").disabled = false;
-    document.getElementById("clearGridButton").disabled = false;
-  }
 
   visualizeSearch() {
       const algo = document.getElementById("startButton").innerHTML;

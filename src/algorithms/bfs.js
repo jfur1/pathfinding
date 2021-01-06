@@ -40,5 +40,5 @@ export function bfs(grid, start, goal){
             }
         }
     }
-    return false;
+    return visited;
 }

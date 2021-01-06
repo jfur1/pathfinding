@@ -5,22 +5,22 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
     let visited = {start: true};
     while(structure.length){
         let node = algoName === "bfs" ? structure.shift() : structure.pop();
+        
         explored.push(node);
         
         if(algoName === "dfs"){
-            visited[node.id].isVisited = true;
+            visited[node.id] = true;
         }
         node.isVisited = true;
-        node.status = "visited";
 
         if(node.id === target.id){
             return explored;
         }
         let neighbors = getNeighbors(node.id, nodes, grid, algoName);
         neighbors.forEach(neighbor => {
-           if(!visited[neighbor].isVisited){
+           if(visited[neighbor] !== true){
                if(algoName === "bfs"){
-                   visited[neighbor].isVisited = true;
+                   visited[neighbor] = true;
                    //console.log("BFS Visited:", visited);
                }
                nodes[neighbor].previousNode = node;

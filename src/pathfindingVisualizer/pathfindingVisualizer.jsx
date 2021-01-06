@@ -139,11 +139,9 @@ export default class PathfindingVisualizer extends Component {
         }
       }
   }
-  //
+  // Same as init grid, exept walls & start/goal nodes are kept
   clearGrid() {
     if(this.algoFinished){
-      const board = this.initGrid();
-      this.setState({grid: board[0], nodes: board[1]});
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
           if(row === START_NODE_ROW && col === START_NODE_COL){
@@ -152,7 +150,10 @@ export default class PathfindingVisualizer extends Component {
           else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-finish';
           }
-          else{
+          else if(document.getElementById(`node-${row}-${col}`).className === "node node-visited"){
+            document.getElementById(`node-${row}-${col}`).className = 'node';
+          }
+          else if(document.getElementById(`node-${row}-${col}`).className === "node node-shortest-path"){
             document.getElementById(`node-${row}-${col}`).className = 'node';
           }
         }

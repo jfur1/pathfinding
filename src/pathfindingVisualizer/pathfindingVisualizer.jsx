@@ -144,9 +144,6 @@ export default class PathfindingVisualizer extends Component {
     if(this.algoFinished){
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
-          // Remove any data associated to nodes from the last search
-          let node = document.getElementById(`node-${row}-${col}`);
-          this.cleanNode(node);
 
           if(row === START_NODE_ROW && col === START_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-start';
@@ -154,21 +151,22 @@ export default class PathfindingVisualizer extends Component {
           else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-finish';
           }
-          if(document.getElementById(`node-${row}-${col}`).className === "node node-visited"){
+          else if(document.getElementById(`node-${row}-${col}`).className === "node node-visited"){
             document.getElementById(`node-${row}-${col}`).className = 'node';
           }
           else if(document.getElementById(`node-${row}-${col}`).className === "node node-shortest-path"){
             document.getElementById(`node-${row}-${col}`).className = 'node';
           }
+          // Reset data associated with node for the new search
+          let node = document.getElementById(`node-${row}-${col}`);
+          node.previousNode = null;
+          node.g = Infinity;
+          node.h = 0;
+          node.f = Infinity;
+          node.isVisited = false;
+          node.status = 'node';
         }
       }
-    }
-  }
-
-  cleanNode(node){
-    // Reset any nodes that are not a wall for the new search
-    if(node.className !== 'node node-wall'){
-      node = newNode(node.col, node.row)
     }
   }
 

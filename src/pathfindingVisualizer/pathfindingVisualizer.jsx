@@ -90,6 +90,7 @@ export default class PathfindingVisualizer extends Component {
         console.log("Select an algorithm!");
       }
       else{
+        console.log("Selected Algorithm:", algo);
         document.getElementById("startButton").disabled = true;
         document.getElementById("clearGridButton").disabled = true;
       }

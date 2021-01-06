@@ -1,5 +1,5 @@
 export function unweightedSearch(nodes, start, target, explored, grid, algoName){
-    if(!start || !target || start === target)
+    if(!start || !target || start.id === target.id)
         return false;
     let structure = [nodes[start.id]];
     let visited = {start: true};
@@ -18,7 +18,7 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
         }
         let neighbors = getNeighbors(node.id, nodes, grid, algoName);
         neighbors.forEach(neighbor => {
-           if(!visited[neighbor]){
+           if(!visited[neighbor].isVisited){
                if(algoName === "bfs"){
                    visited[neighbor] = true;
                    console.log("BFS Visited:", visited);
@@ -27,23 +27,9 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
                structure.push(nodes[neighbor]);
            } 
         });
-        //updateNeighborsUnweighted(node, nodes, grid, visited, algoName);
     }
     return false;
 }
-
-// function updateNeighborsUnweighted(node, nodes, grid, visited, algoName){
-//     const neighbors = getNeighbors(node.id, nodes, grid, algoName);
-//     for(const neighbor of neighbors){
-//         neighbor.previousNode = node;
-//         if(!visited[neighbor]){
-//             if(algoName === "bfs"){
-//                 node.isVisited;
-//             }
-//             nodes[neigh]
-//         }
-//     }
-// }
 
 function getNeighbors(id, nodes, grid, algoName){
     let coords = id.split("-");

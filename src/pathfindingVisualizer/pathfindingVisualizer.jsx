@@ -88,7 +88,6 @@ export default class PathfindingVisualizer extends Component {
       const algo = document.getElementById("startButton").innerHTML;
       if(algo === "Visualize Algorithm"){
         console.log("Select an algorithm!");
-        return;
       }
       else{
         console.log("Selected Algorithm:", algo);

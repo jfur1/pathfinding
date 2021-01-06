@@ -49,41 +49,41 @@ export default class PathfindingVisualizer extends Component {
   }
 
   animateSearch(visited, path) {
-    for (let i = 0; i <= visited.length; i++) {
-      if (i === visited.length) {
-        setTimeout(() => {
-          this.animatePath(path);
-        }, 10 * i);
-        return;
-      }
-      // Visited nodes get animated in 10ms intervals
-      setTimeout(() => {
-        const node = visited[i];
-        document.getElementById(`node-${node.row}-${node.col}`).className =
-          'node node-visited';
-      }, 10 * i);
-    }
-  }
-
-  animatePath(path) {
-    if(path.length === 1){
+    if(visited === false || path.length === 1){
       console.log("No path found.")
       this.algoFinished = true;
       document.getElementById("startButton").disabled = false;
       document.getElementById("clearGridButton").disabled = false;
     }else{
-        for (let i = 0; i < path.length; i++) {
+        for (let i = 0; i <= visited.length; i++) {
+          if (i === visited.length) {
+            setTimeout(() => {
+              this.animatePath(path);
+            }, 10 * i);
+            return;
+          }
+          // Visited nodes get animated in 10ms intervals
           setTimeout(() => {
-            const node = path[i];
+            const node = visited[i];
             document.getElementById(`node-${node.row}-${node.col}`).className =
-              'node node-shortest-path';
-          }, 35 * i);
+              'node node-visited';
+          }, 10 * i);
         }
-        this.algoFinished = true;
-        document.getElementById("startButton").disabled = false;
-        document.getElementById("clearGridButton").disabled = false;
       }
     }
+
+  animatePath(path) {
+    for (let i = 0; i < path.length; i++) {
+      setTimeout(() => {
+        const node = path[i];
+        document.getElementById(`node-${node.row}-${node.col}`).className =
+          'node node-shortest-path';
+      }, 25 * i);
+    }
+    this.algoFinished = true;
+    document.getElementById("startButton").disabled = false;
+    document.getElementById("clearGridButton").disabled = false;
+  }
 
   visualizeSearch() {
       const algo = document.getElementById("startButton").innerHTML;

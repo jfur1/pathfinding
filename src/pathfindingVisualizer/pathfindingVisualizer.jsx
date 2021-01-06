@@ -294,7 +294,7 @@ const updateBoard = (grid, nodes, row, col) => {
     return [grid, nodes];
   }
   // Get the node in question
-  const node = nodes[`${row}-${col}`];
+  const node = newGrid[row][col];
   // Create a new node with prop "isWall" toggled
   const newNode = {
     ...node,
@@ -302,6 +302,7 @@ const updateBoard = (grid, nodes, row, col) => {
   };
   // Set status to wall if .isWall === true
   if(newNode.isWall) newNode.status = "wall";
+  else newNode.status = "node";
   // Update the new node in the grid & nodes sets, then return to be updated as state
   newNodes[`${row}-${col}`] = newNode;
   newGrid[row][col] = newNode;

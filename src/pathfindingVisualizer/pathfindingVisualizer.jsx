@@ -165,6 +165,7 @@ export default class PathfindingVisualizer extends Component {
           node.f = Infinity;
           node.isVisited = false;
           node.status = 'node';
+          this.state.grid[row][col] = node;
         }
       }
     }

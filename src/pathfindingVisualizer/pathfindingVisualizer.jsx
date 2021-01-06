@@ -93,44 +93,45 @@ export default class PathfindingVisualizer extends Component {
         console.log("Selected Algorithm:", algo);
         document.getElementById("startButton").disabled = true;
         document.getElementById("clearGridButton").disabled = true;
-      }
       
-      this.algoFinished = false;
-      const {grid, nodes} = this.state;
-      const start = grid[START_NODE_ROW][START_NODE_COL];
-      const goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
-      var visited = [];
-      var path = [];
-      // Select algo based on start button text
-      if(algo === "A* Search"){
-        console.log(nodes);
-        // console.log("start:", start)
-        // console.log("start-id:", start.id)
-        // console.log("goal:", goal)
-        visited = astar(nodes, start, goal, visited, grid, []);
-        path = getAstarPath(goal);
-        console.log("Astar Visited:", visited);
-        console.log("Astar Path:", path);
-        this.animateSearch(visited, path);
-      }
-      else if(algo === "Dijkstra's Algorithm"){
-        visited = dijkstra(grid, start, goal);
-        path = getPath(goal);
-        console.log("Dijkstra Visited:", visited);
-        console.log("Dijkstra Path:", path);
-        this.animateSearch(visited, path);
-      }else if(algo === "Depth-First-Search"){
-        visited = unweightedSearch(nodes, start, goal, visited, grid, "dfs");
-        path = getPath(goal);
-        console.log("DFS Visited:", visited);
-        console.log("DFS Path:", path);
-        this.animateSearch(visited, path);
-      }else if(algo === "Breadth-First-Search"){
-        visited = bfs(grid, start, goal);
-        path = getPath(goal);
-        console.log("BFS Visited:", visited);
-        console.log("BFS Path:", path);
-        this.animateSearch(visited, path);
+      
+          this.algoFinished = false;
+          const {grid, nodes} = this.state;
+          const start = grid[START_NODE_ROW][START_NODE_COL];
+          const goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+          var visited = [];
+          var path = [];
+          // Select algo based on start button text
+          if(algo === "A* Search"){
+            console.log(nodes);
+            // console.log("start:", start)
+            // console.log("start-id:", start.id)
+            // console.log("goal:", goal)
+            visited = astar(nodes, start, goal, visited, grid, []);
+            path = getAstarPath(goal);
+            console.log("Astar Visited:", visited);
+            console.log("Astar Path:", path);
+            this.animateSearch(visited, path);
+          }
+          else if(algo === "Dijkstra's Algorithm"){
+            visited = dijkstra(grid, start, goal);
+            path = getPath(goal);
+            console.log("Dijkstra Visited:", visited);
+            console.log("Dijkstra Path:", path);
+            this.animateSearch(visited, path);
+          }else if(algo === "Depth-First-Search"){
+            visited = unweightedSearch(nodes, start, goal, visited, grid, "dfs");
+            path = getPath(goal);
+            console.log("DFS Visited:", visited);
+            console.log("DFS Path:", path);
+            this.animateSearch(visited, path);
+          }else if(algo === "Breadth-First-Search"){
+            visited = bfs(grid, start, goal);
+            path = getPath(goal);
+            console.log("BFS Visited:", visited);
+            console.log("BFS Path:", path);
+            this.animateSearch(visited, path);
+          }
       }
       // else{
       //   visited = unweightedSearch(nodes, start, goal, visited, grid, algo);

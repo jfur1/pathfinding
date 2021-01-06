@@ -4,7 +4,7 @@ import {dijkstra, getPath} from '../algorithms/dijkstra';
 import {astar, getAstarPath} from '../algorithms/astar';
 import './pathfindingVisualizer.css';
 import {unweightedSearch} from '../algorithms/unweightedSearch';
-import { nodeName } from 'jquery';
+import { bfs } from '../algorithms/bfs';
 
 const START_NODE_ROW = 10;
 const START_NODE_COL = 15;
@@ -124,7 +124,7 @@ export default class PathfindingVisualizer extends Component {
         console.log("DFS Path:", path);
         this.animateSearch(visited, path);
       }else if(algo === "Breadth-First-Search"){
-        visited = unweightedSearch(nodes, start, goal, visited, grid, "bfs");
+        visited = bfs(grid, start, goal);
         path = getPath(goal);
         console.log("BFS Visited:", visited);
         console.log("BFS Path:", path);

@@ -9,7 +9,7 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
         explored.push(node);
         
         if(algoName === "dfs"){
-            visited[node.id] = true;
+            visited[node] = true;
         }
         node.isVisited = true;
 
@@ -18,7 +18,7 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
         }
         let neighbors = getNeighbors(node.id, nodes, grid, algoName);
         neighbors.forEach(neighbor => {
-           if(visited[neighbor] !== true){
+           if(!visited[neighbor]){
                if(algoName === "bfs"){
                    visited[neighbor] = true;
                    //console.log("BFS Visited:", visited);

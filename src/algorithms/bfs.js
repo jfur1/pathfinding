@@ -24,9 +24,20 @@ export function bfs(grid, start, goal){
                 }
             }
             if(node.col > 0){
-                nextNode = grid[node.row][node.col-1]
+                nextNode = grid[node.row][node.col-1];
+                if(!nextNode.isVisited){
+                    nextNode.previousNode = node;
+                    stack.push(nextNode);
+                }
+            }
+            if(node.col < grid[0].length-1){
+                nextNode = grid[node.row][node.col+1];
+                if(!nextNode.isVisited){
+                    nextNode.previousNode = node;
+                    stack.push(nextNode);
+                }
             }
         }
     }
-
+    return visited;
 }

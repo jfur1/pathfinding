@@ -8,7 +8,7 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
         explored.push(node);
         
         if(algoName === "dfs"){
-            visited[node.id] = true;
+            visited[node.id].isVisited = true;
         }
         node.isVisited = true;
         node.status = "visited";
@@ -20,7 +20,7 @@ export function unweightedSearch(nodes, start, target, explored, grid, algoName)
         neighbors.forEach(neighbor => {
            if(!visited[neighbor].isVisited){
                if(algoName === "bfs"){
-                   visited[neighbor] = true;
+                   visited[neighbor].isVisited = true;
                    //console.log("BFS Visited:", visited);
                }
                nodes[neighbor].previousNode = node;

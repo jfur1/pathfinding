@@ -6,20 +6,15 @@ import {dfs} from '../algorithms/dfs';
 import { bfs } from '../algorithms/bfs';
 import './pathfindingVisualizer.css';
 
-const START_NODE_ROW = 10;
-const START_NODE_COL = 15;
-const FINISH_NODE_ROW = 10;
-const FINISH_NODE_COL = 35;
-
 export default class PathfindingVisualizer extends Component {
   constructor(){
     super();
     this.state = {
       grid: [],
-      START_NODE_ROW: 5,
-      START_NODE_COL: 5,
-      FINISH_NODE_ROW: 5,
-      FINISH_NODE_COL: 15,
+      START_NODE_ROW: 9,
+      START_NODE_COL: 14,
+      FINISH_NODE_ROW: 9,
+      FINISH_NODE_COL: 32,
       mousePressed: false,
       N_ROWS: 20,
       N_COLS: 50,

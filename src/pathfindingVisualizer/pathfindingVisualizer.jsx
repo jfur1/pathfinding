@@ -55,7 +55,7 @@ export default class PathfindingVisualizer extends Component {
       const isDesktop = !this.state.isDesktop;
       let grid;
       if (isDesktop) {
-        grid = this.getInitialGrid(
+        grid = this.initGrid(
           this.state.N_ROWS,
           this.state.N_COLS,
         );
@@ -69,7 +69,7 @@ export default class PathfindingVisualizer extends Component {
         ) {
           alert('Start & Finish Nodes Must Be within 10 Rows x 20 Columns');
         } else {
-          grid = this.getInitialGrid(
+          grid = this.initGrid(
             this.state.N_ROWS_MOBILE,
             this.state.N_COLS_MOBILE,
           );

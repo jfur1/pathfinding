@@ -40,6 +40,7 @@ export default class PathfindingVisualizer extends Component {
     if(is_mobile) alert('Mobile version still in development. Try using a computer for the best experience!');
     this.updateAlgoDescription("start");
     this.setState({grid});
+    document.title = "Pathfinding Visualizer";
   }
 
   toggleIsRunning() {

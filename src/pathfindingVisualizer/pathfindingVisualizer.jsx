@@ -163,47 +163,35 @@ export default class PathfindingVisualizer extends Component {
     return true;
   }
 
-  handleMouseEnter(row, col) {
+  handleMouseEnter(r, c) {
     if (!this.state.isRunning) {
       if (this.state.mousePressed) {
-        const nodeClass = document.getElementById(`node-${row}-${col}`)
+        const nodeClass = document.getElementById(`node-${r}-${c}`)
           .className;
         if (this.state.isStart) {
           if (nodeClass !== 'node node-wall') {
-            const prevStartNode = this.state.grid[this.state.row][
-              this.state.col
-            ];
+            const prevStartNode = this.state.grid[this.state.r][this.state.c];
             prevStartNode.isStart = false;
-            document.getElementById(
-              `node-${this.state.row}-${this.state.col}`,
-            ).className = 'node';
-
-            this.setState({row: row, col: col});
-            const currStartNode = this.state.grid[row][col];
+            document.getElementById(`node-${this.state.r}-${this.state.c}`,).className = 'node';
+            this.setState({row: r, col: c});
+            const currStartNode = this.state.grid[r][c];
             currStartNode.isStart = true;
-            document.getElementById(`node-${row}-${col}`).className =
-              'node node-start';
+            document.getElementById(`node-${r}-${c}`).className ='node node-start';
           }
-          this.setState({START_NODE_ROW: row, START_NODE_COL: col});
+          this.setState({START_NODE_ROW: r, START_NODE_COL: c});
         } else if (this.state.isFinishN) {
           if (nodeClass !== 'node node-wall') {
-            const prevFinish = this.state.grid[this.state.row][
-              this.state.col
-            ];
+            const prevFinish = this.state.grid[this.state.r][this.state.c];
             prevFinish.isFinish = false;
-            document.getElementById(
-              `node-${this.state.row}-${this.state.col}`,
-            ).className = 'node';
-
-            this.setState({row: row, col: col});
-            const currentFinish = this.state.grid[row][col];
+            document.getElementById(`node-${this.state.r}-${this.state.c}`,).className = 'node';
+            this.setState({row: r, col: c});
+            const currentFinish = this.state.grid[row][c];
             currentFinish.isFinish = true;
-            document.getElementById(`node-${row}-${col}`).className =
-              'node node-finish';
+            document.getElementById(`node-${r}-${c}`).className = 'node node-finish';
           }
-          this.setState({FINISH_NODE_ROW: row, FINISH_NODE_COL: col});
+          this.setState({FINISH_NODE_ROW: r, FINISH_NODE_COL: c});
         } else if (this.state.isWall) {
-          const newGrid = updateGrid(this.state.grid, row, col);
+          const newGrid = updateGrid(this.state.grid, r, c);
           this.setState({grid: newGrid});
         }
       }

@@ -169,7 +169,8 @@
 //     return (delta_x + delta_y);
 // }
 
-export function astar(grid, start, goal){
+export function astar(trueGrid, start, goal){
+    const grid = {...grid};
     const visited = [];
     start.distance = 0;
     const frontier = getNodes(grid);

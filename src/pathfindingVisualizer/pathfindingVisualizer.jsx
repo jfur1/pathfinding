@@ -101,8 +101,8 @@ export default class PathfindingVisualizer extends Component {
         this.algoFinished = false;
 
         const {grid, nodes} = this.state;
-        var start = grid[START_NODE_ROW][START_NODE_COL];
-        var goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+        const start = grid[START_NODE_ROW][START_NODE_COL];
+        const goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         var visited = [];
         var path = [];
         // Select algo based on start button text
@@ -150,11 +150,14 @@ export default class PathfindingVisualizer extends Component {
           else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-finish';
           }
-          else if(document.getElementById(`node-${row}-${col}`).className !== "node node-wall"){
+          else if(document.getElementById(`node-${row}-${col}`).className === "node node-visited"){
             document.getElementById(`node-${row}-${col}`).className = 'node';
-            this.state.grid[row][col].previousNode = null;
-            this.state.grid[row][col].isVisited = false;
           }
+          else if(document.getElementById(`node-${row}-${col}`).className === "node node-shortest-path"){
+            document.getElementById(`node-${row}-${col}`).className = 'node';
+          }
+          // this.state.grid[row][col].previousNode = null;
+          // this.state.grid[row][col].isVisited = false;
         }
       }
     }

@@ -94,18 +94,19 @@ export default class PathfindingVisualizer extends Component {
       }
       else{
         console.log("Selected Algorithm:", algo);
-        // Clear any visited nodes from the grid
-        this.clearGrid();
-        document.getElementById("startButton").disabled = true;
-        document.getElementById("clearGridButton").disabled = true;
-      
-        this.algoFinished = false;
 
-        const {grid, nodes} = this.state;
+        var {grid, nodes} = this.state;
         var start = grid[START_NODE_ROW][START_NODE_COL];
         var goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         var visited = [];
         var path = [];
+
+        // Clear any visited nodes from the grid
+        this.clearGrid();
+        document.getElementById("startButton").disabled = true;
+        document.getElementById("clearGridButton").disabled = true;
+        this.algoFinished = false;
+
         // Select algo based on start button text
         if(algo === "A* Search"){
           console.log(nodes);

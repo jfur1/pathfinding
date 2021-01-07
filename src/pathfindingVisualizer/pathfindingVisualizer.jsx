@@ -99,8 +99,8 @@ export default class PathfindingVisualizer extends Component {
     return {
       row,
       col,
-      isStart: this.state.START_NODE_ROW && this.state.START_NODE_COL,
-      isFinish: this.state.FINISH_NODE_ROW && this.state.FINISH_NODE_COL,
+      isStart: row === this.state.START_NODE_ROW && col === this.state.START_NODE_COL,
+      isFinish: row === this.state.FINISH_NODE_ROW && col === this.state.FINISH_NODE_COL,
       distance: Infinity,
       heuristic:  
         Math.abs(this.state.FINISH_NODE_ROW - row) + 

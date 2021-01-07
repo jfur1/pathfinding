@@ -100,7 +100,7 @@ export default class PathfindingVisualizer extends Component {
         document.getElementById("clearGridButton").disabled = true;
         this.algoFinished = false;
 
-        var {grid, nodes} = this.state;
+        const {grid, nodes} = this.state;
         var start = grid[START_NODE_ROW][START_NODE_COL];
         var goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         var visited = [];

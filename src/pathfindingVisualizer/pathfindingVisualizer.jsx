@@ -140,35 +140,37 @@ export default class PathfindingVisualizer extends Component {
       }
   }
   // Same as init grid, exept walls & start/goal nodes are kept
-  clearGrid() {
+  clearGrid(reset) {
     if(this.algoFinished){
+
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
-          // Remove any data associated to nodes from the last search
-          let node = document.getElementById(`node-${row}-${col}`);
-          this.cleanNode(node);
-
+          let node = this.state.grid[row][col];
           if(row === START_NODE_ROW && col === START_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-start';
           }
           else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-finish';
           }
-          else if(document.getElementById(`node-${row}-${col}`).className === "node node-visited"){
+          else if(reset === true){
             document.getElementById(`node-${row}-${col}`).className = 'node';
-          }
-          else if(document.getElementById(`node-${row}-${col}`).className === "node node-shortest-path"){
-            document.getElementById(`node-${row}-${col}`).className = 'node';
+            node.isWall = false;
+          }else{
+            if(document.getElementById(`node-${row}-${col}`).className !== "node node-wall"){
+              document.getElementById(`node-${row}-${col}`).className = 'node';
+            }
+          
+          // Reset data associated with node for the new search
+          node.previousNode = null;
+          node.g = Infinity;
+          node.h = 0;
+          node.f = Infinity;
+          node.isVisited = false;
+          node.status = 'node';
+          this.state.grid[row][col] = node;
           }
         }
       }
-    }
-  }
-
-  cleanNode(node){
-    // Reset any nodes that are not a wall for the new search
-    if(node.className !== 'node node-wall'){
-      node = newNode(node.col, node.row)
     }
   }
 
@@ -208,7 +210,7 @@ export default class PathfindingVisualizer extends Component {
           <button id="startButton" onClick={() => this.visualizeSearch()}>Visualize Algorithm</button>
         </div>
         <div class="center">
-          <button id="clearGridButton" onClick={() => this.initGrid()}>Reset Grid</button>
+          <button id="clearGridButton" onClick={() => this.clearGrid(true)}>Reset Grid</button>
         </div>
         <div className="grid">
           {grid.map((row, rowIdx) => {

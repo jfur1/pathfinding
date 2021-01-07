@@ -155,10 +155,13 @@ export default class PathfindingVisualizer extends Component {
           else if(reset === true){
             document.getElementById(`node-${row}-${col}`).className = 'node';
             node.isWall = false;
-          }else{
-            if(document.getElementById(`node-${row}-${col}`).className !== "node node-wall"){
+          }
+          else if(document.getElementById(`node-${row}-${col}`).className === "node node-wall"){
+            document.getElementById(`node-${row}-${col}`).className = 'node node-wall';
+          }
+          else if(document.getElementById(`node-${row}-${col}`).className !== "node node-wall"){
               document.getElementById(`node-${row}-${col}`).className = 'node';
-            }
+          }
           
           // Reset data associated with node for the new search
           node.previousNode = null;

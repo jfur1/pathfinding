@@ -81,8 +81,8 @@ export default class PathfindingVisualizer extends Component {
 
   /* -------------------- Initialize 2D Grid --------------------- */
   initGrid = (
-    rowCount = this.state.ROW_COUNT,
-    colCount = this.state.COLUMN_COUNT,
+    rowCount = this.state.N_ROWS,
+    colCount = this.state.N_COLS,
   ) => {
     const initialGrid = [];
     for (let row = 0; row < rowCount; row++) {

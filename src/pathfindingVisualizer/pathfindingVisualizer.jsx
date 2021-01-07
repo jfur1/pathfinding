@@ -361,7 +361,7 @@ export default class PathfindingVisualizer extends Component {
       else if(algo === "BFS"){
         document.getElementById('algoDescription').innerHTML = `Breadth-First Search is <i><b>unweighted</b></i> and <i><b>does guarantee</b></i> the shortest path!`;
       }    else{
-        document.getElementById('algoDescription').innerHTML = "Select an algorithm to visualize!";
+        document.getElementById('algoDescription').innerHTML = "Select an algorithm to visualize!<br><br>Try drawing some walls or moving the start / target nodes!";
       }
     }
   }

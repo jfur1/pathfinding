@@ -156,8 +156,8 @@ export default class PathfindingVisualizer extends Component {
           else if(document.getElementById(`node-${row}-${col}`).className === "node node-shortest-path"){
             document.getElementById(`node-${row}-${col}`).className = 'node';
           }
-          // this.state.grid[row][col].previousNode = null;
-          // this.state.grid[row][col].isVisited = false;
+          this.state.grid[row][col].previousNode = null;
+          this.state.grid[row][col].isVisited = false;
         }
       }
     }

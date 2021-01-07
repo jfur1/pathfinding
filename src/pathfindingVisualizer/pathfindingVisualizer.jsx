@@ -100,9 +100,9 @@ export default class PathfindingVisualizer extends Component {
         document.getElementById("clearGridButton").disabled = true;
         this.algoFinished = false;
 
-        const {trueGrid, trueNodes} = this.state;
-        var grid = trueGrid;
-        var nodes = trueNodes;
+        var {grid, nodes} = this.state;
+        // var grid = trueGrid;
+        // var nodes = trueNodes;
         var start = grid[START_NODE_ROW][START_NODE_COL];
         var goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         var visited = [];
@@ -141,12 +141,12 @@ export default class PathfindingVisualizer extends Component {
       }
   }
   // Same as init grid, exept walls & start/goal nodes are kept
-  clearGrid() {
+  clearGrid(grid) {
     if(this.algoFinished){
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
-          this.state.grid[row][col].previousNode = null;
-          this.state.grid[row][col].isVisited = false;
+          grid[row][col].previousNode = null;
+          grid[row][col].isVisited = false;
           if(row === START_NODE_ROW && col === START_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-start';
           }

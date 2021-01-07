@@ -102,8 +102,8 @@ export default class PathfindingVisualizer extends Component {
         this.algoFinished = false;
 
         const {grid, nodes} = this.state;
-        const start = grid[START_NODE_ROW][START_NODE_COL];
-        const goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+        var start = grid[START_NODE_ROW][START_NODE_COL];
+        var goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         var visited = [];
         var path = [];
         // Select algo based on start button text
@@ -144,6 +144,8 @@ export default class PathfindingVisualizer extends Component {
     if(this.algoFinished){
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
+          this.state.grid[row][col].previousNode = null;
+          this.state.grid[row][col].isVisited = false;
           if(row === START_NODE_ROW && col === START_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-start';
           }

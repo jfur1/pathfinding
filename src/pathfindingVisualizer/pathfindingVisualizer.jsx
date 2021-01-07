@@ -4,7 +4,6 @@ import {dijkstra} from '../algorithms/dijkstra';
 import {astar} from '../algorithms/astar';
 import {dfs} from '../algorithms/dfs';
 import { bfs } from '../algorithms/bfs';
-import Button from 'react-bootstrap/Button';
 import './pathfindingVisualizer.css';
 
 const START_NODE_ROW = 10;
@@ -467,56 +466,56 @@ export default class PathfindingVisualizer extends Component {
               })}
             </tbody>
           </table>
-          <Button
-
+          <button
+            type="button"
             className="btn btn-danger"
             onClick={() => this.clearGrid()}>
             Clear Grid
-          </Button>
-          <Button
+          </button>
+          <button
             type="button"
             className="btn btn-warning"
             onClick={() => this.clearWalls()}>
             Clear Walls
-          </Button>
-          <Button
+          </button>
+          <button
             type="button"
             className="btn btn-primary"
             onClick={() => this.visualize('Dijkstra')}>
             Dijkstra's
-          </Button>
-          <Button
+          </button>
+          <button
             type="button"
             className="btn btn-primary"
             onClick={() => this.visualize('astar')}>
             A*
-          </Button>
-          <Button
+          </button>
+          <button
             type="button"
             className="btn btn-primary"
             onClick={() => this.visualize('BFS')}>
             Breadth-First Search
-          </Button>
-          <Button
+          </button>
+          <button
             type="button"
             className="btn btn-primary"
             onClick={() => this.visualize('DFS')}>
             Depth-First Search
-          </Button>
+          </button>
           {this.state.isDesktopView ? (
-            <Button
+            <button
               type="button"
               className="btn btn-light"
               onClick={() => this.toggleView()}>
               Mobile View
-            </Button>
+            </button>
           ) : (
-            <Button
+            <button
               type="button"
               className="btn btn-dark"
               onClick={() => this.toggleView()}>
               Desktop View
-            </Button>
+            </button>
           )}
         </div>
       );

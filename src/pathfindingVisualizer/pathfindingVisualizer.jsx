@@ -95,16 +95,16 @@ export default class PathfindingVisualizer extends Component {
       else{
         console.log("Selected Algorithm:", algo);
 
-        var {grid, nodes} = this.state;
+        const {grid, nodes} = this.state;
         // var grid = trueGrid;
         // var nodes = trueNodes;
-        var start = grid[START_NODE_ROW][START_NODE_COL];
-        var goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
+        const start = grid[START_NODE_ROW][START_NODE_COL];
+        const goal = grid[FINISH_NODE_ROW][FINISH_NODE_COL];
         var visited = [];
         var path = [];
 
         // Clear any visited nodes from the grid
-        this.clearGrid(grid);
+        this.clearGrid();
         document.getElementById("startButton").disabled = true;
         document.getElementById("clearGridButton").disabled = true;
         this.algoFinished = false;
@@ -143,12 +143,12 @@ export default class PathfindingVisualizer extends Component {
       }
   }
   // Same as init grid, exept walls & start/goal nodes are kept
-  clearGrid(grid) {
+  clearGrid() {
     if(this.algoFinished){
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
-          grid[row][col].previousNode = null;
-          grid[row][col].isVisited = false;
+          this.state.grid[row][col].previousNode = null;
+          this.state.grid[row][col].isVisited = false;
           if(row === START_NODE_ROW && col === START_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-start';
           }

@@ -1,10 +1,11 @@
-.grid {
-    margin: 45px 0 0;
-  }
+.grid-container {
+  margin: 10% auto;
+}
 
-  .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
+.grid {
+  white-space: pre;
+}
+
+button {
+  margin: 2px;
+}

@@ -212,7 +212,7 @@ export default class PathfindingVisualizer extends Component {
           }
           this.setState({FINISH_NODE_ROW: row, FINISH_NODE_COL: col});
         } else if (this.state.isWallNode) {
-          const newGrid = getNewGridWithWallToggled(this.state.grid, row, col);
+          const newGrid = updateGrid(this.state.grid, row, col);
           this.setState({grid: newGrid});
         }
       }

@@ -441,7 +441,7 @@ export default class PathfindingVisualizer extends Component {
                           isFinish={isFinish}
                           isStart={isStart}
                           isWall={isWall}
-                          mousePressed={mouseIsPressed}
+                          mousePressed={mousePressed}
                           onMouseDown={(row, col) =>
                             this.handleMouseDown(row, col)
                           }

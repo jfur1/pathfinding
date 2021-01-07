@@ -10,8 +10,85 @@ button {
   margin: 2px;
 }
 
+#programButtons{
+  padding: 25px 5px 15px 0;
+}
+
 #algoDescription{
   text-align: center;
   color: #334444;
   margin-top: 25px;
+}
+/* -------------------- Legend ------------------------- */
+
+#legend div{
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  position: relative;
+  top: 0.35em;
+  margin: 0px 0.42em;
+}
+
+#legend ul {
+  display: inline;
+  list-style-type: disc;
+  padding-top: 10px;
+}
+li {
+  display: inline-block;
+  text-align: center;
+}
+
+#legend > ul li {
+  display: inline-block;
+  list-style: none;
+  padding: 10px 10px 0 0;
+}
+
+.start-legend{
+  border: 1px solid rgb(175, 216, 248);
+  background-color: green;
+  background-position: center;
+  background-size: contain;
+}
+
+.target-legend{
+  border: 1px solid rgb(175, 216, 248);
+  background-color: red;
+  background-position: center;
+  background-size: contain;
+}
+
+.unvisited-legend{
+  border: 1px solid rgb(159, 210, 249);
+  background-position: center;
+  background-size: contain;
+}
+
+.visited-legend{
+  border: 1px solid rgb(175, 216, 248);
+  background-color: rgba(250, 129, 222, 0.831);
+  background-position: center;
+  background-size: contain;
+}
+.visited-legend-2{
+  border: 1px solid rgb(175, 216, 248);
+  background-color: rgba(74, 192, 255, 0.75);
+  background-position: center;
+  background-size: contain;
+}
+
+.path-legend{
+  border: 1px solid rgb(175, 216, 248);
+  background-color:rgb(255, 254, 106);
+  background-position: center;
+  background-size: contain;
+}
+
+.wall-legend{
+  border: 1px solid rgb(175, 216, 248);
+  background-color: rgb(12, 53, 71);
+  background-position: center;
+  background-size: contain;
 }

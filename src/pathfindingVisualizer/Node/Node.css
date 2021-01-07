@@ -27,22 +27,22 @@
 @keyframes visitedAnimation {
   0% {
     transform: scale(0.3);
-    background-color: rgba(0, 0, 66, 0.75);
+    background-color: rgb(0, 0, 133);
     border-radius: 100%;
   }
 
   50% {
-    background-color: rgba(217, 17, 187, 0.75);
+    background-color: rgba(250, 129, 222, 0.831);
   }
 
   75% {
     transform: scale(1.2);
-    background-color: rgba(34, 17, 217, 0.75);
+    background-color: rgba(35, 126, 238, 0.75);
   }
 
   100% {
     transform: scale(1);
-    background-color: rgba(0, 218, 69, 0.75);
+    background-color: rgba(74, 192, 255, 0.75);
   }
 }
 

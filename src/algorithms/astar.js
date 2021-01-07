@@ -19,7 +19,7 @@ export function astar(grid, start, goal){
             if(node.distance === Infinity) return false;
             node.isVisited = true;
             visited.push(node);
-            if(node == goal) return visited;
+            if(node === goal) return visited;
             updateUnvisitedNeighbors(node, grid);
         }
     }

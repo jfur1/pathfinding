@@ -448,7 +448,7 @@ export default class PathfindingVisualizer extends Component {
               </ul>
             </div>
           </nav>
-          <br></br>
+          <div id="programButtons">
           <button
             type="button"
             className="btn btn-danger mr-1"
@@ -500,7 +500,31 @@ export default class PathfindingVisualizer extends Component {
               Desktop View
             </button>
           )}
-          <br></br>
+          </div>
+          <div id="legend">
+            <ul>
+              <li><div class="start-legend"></div>Start Node</li>
+            </ul>
+            <ul>
+              <li><div class="target-legend"></div>Target Node</li>
+            </ul>
+            <ul>
+              <li><div class="unvisited-legend"></div>Unvisited Node</li>
+            </ul>
+            <ul>
+              <li>
+                <div class="visited-legend"></div>
+                <div class="visited-legend-2"></div>
+                Visited Node
+              </li>
+            </ul>
+            <ul>
+              <li><div class="wall-legend"></div>Wall Node</li>
+            </ul>
+            <ul>
+              <li><div class="path-legend"></div>Shortest-Path Node</li>
+            </ul>
+          </div>
           <div id="algoDescription"></div>
           <table
             className="grid-container"

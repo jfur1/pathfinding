@@ -94,7 +94,7 @@ export default class PathfindingVisualizer extends Component {
       }
       else{
         console.log("Selected Algorithm:", algo);
-        
+
         // Clear any visited nodes from the grid
         this.clearGrid();
         document.getElementById("startButton").disabled = true;
@@ -113,7 +113,8 @@ export default class PathfindingVisualizer extends Component {
           // console.log("start:", start)
           // console.log("start-id:", start.id)
           // console.log("goal:", goal)
-          visited = astar(nodes, start, goal, visited, grid, []);
+          //visited = astar(nodes, start, goal, visited, grid, []);
+          visited = astar(grid, start, goal);
           path = getAstarPath(goal);
           console.log("Astar Visited:", visited);
           console.log("Astar Path:", path);

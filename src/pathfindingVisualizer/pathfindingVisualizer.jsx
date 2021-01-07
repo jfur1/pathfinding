@@ -144,6 +144,10 @@ export default class PathfindingVisualizer extends Component {
     if(this.algoFinished){
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
+          // Remove any data associated to nodes from the last search
+          let node = document.getElementById(`node-${row}-${col}`);
+          this.cleanNode(node);
+
           if(row === START_NODE_ROW && col === START_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-start';
           }
@@ -160,6 +164,14 @@ export default class PathfindingVisualizer extends Component {
       }
     }
   }
+
+  cleanNode(node){
+    // Reset any nodes that are not a wall for the new search
+    if(node.className !== 'node node-wall'){
+      node = newNode(node.col, node.row)
+    }
+  }
+
   // Initialize New Grid
   initGrid = () => {
     var grid = [];

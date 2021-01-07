@@ -426,7 +426,7 @@ export default class PathfindingVisualizer extends Component {
                   </a>
                 </li>
                 <li className="nav-item">
-                  <a className="nav-link" href="https://jfur1.github.io">
+                  <a className="nav-link" href="https://jfur1.github.com">
                     Check Out Other Cool Projects
                   </a>
                 </li>

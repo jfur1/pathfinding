@@ -1,5 +1,5 @@
 .grid-container {
-  margin: 10% auto;
+  margin: 2% auto;
 }
 
 .grid {
@@ -8,4 +8,10 @@
 
 button {
   margin: 2px;
+}
+
+#algoDescription{
+  text-align: center;
+  color: #334444;
+  margin-top: 25px;
 }

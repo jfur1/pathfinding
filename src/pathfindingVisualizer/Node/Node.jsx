@@ -16,7 +16,7 @@ export default class Node extends Component {
       row,
     } = this.props;
     
-    const extraClassName = isFinish
+    const type = isFinish
       ? 'node-finish'
       : isStart
       ? 'node-start'
@@ -27,7 +27,7 @@ export default class Node extends Component {
     return (
       <td
         id={`node-${row}-${col}`}
-        className={`node ${extraClassName}`}
+        className={`node ${type}`}
         onMouseDown={() => onMouseDown(row, col)}
         onMouseEnter={() => onMouseEnter(row, col)}
         onMouseUp={() => onMouseUp()}></td>

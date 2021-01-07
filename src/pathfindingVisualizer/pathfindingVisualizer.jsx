@@ -348,21 +348,22 @@ export default class PathfindingVisualizer extends Component {
   }
 
   updateAlgoDescription(algo){
-    if(algo === "Dijkstra"){
-      document.getElementById('algoDescription').innerHTML = `${algo}'s Algorithm is <i><b>weighted</b></i> and <i><b>does guarantee</b></i> the shortest path!`;
+    if (!this.state.isRunning){
+      if(algo === "Dijkstra"){
+        document.getElementById('algoDescription').innerHTML = `${algo}'s Algorithm is <i><b>weighted</b></i> and <i><b>does guarantee</b></i> the shortest path!`;
+      }
+      else if(algo === "astar"){
+        document.getElementById('algoDescription').innerHTML = `A* Search is <i><b>weighted</b></i> and <i><b>does guarantee</b></i> the shortest path!`;
+      }
+      else if(algo === "DFS"){
+        document.getElementById('algoDescription').innerHTML = `Depth-First Search is <i><b>unweighted</b></i> and <i><b>does not guarantee</b></i> the shortest path!`;
+      }
+      else if(algo === "BFS"){
+        document.getElementById('algoDescription').innerHTML = `Breadth-First Search is <i><b>unweighted</b></i> and <i><b>does guarantee</b></i> the shortest path!`;
+      }    else{
+        document.getElementById('algoDescription').innerHTML = "Select an algorithm to visualize!";
+      }
     }
-    else if(algo === "astar"){
-      document.getElementById('algoDescription').innerHTML = `A* Search is <i><b>weighted</b></i> and <i><b>does guarantee</b></i> the shortest path!`;
-    }
-    else if(algo === "DFS"){
-      document.getElementById('algoDescription').innerHTML = `Depth-First Search is <i><b>unweighted</b></i> and <i><b>does not guarantee</b></i> the shortest path!`;
-    }
-    else if(algo === "BFS"){
-      document.getElementById('algoDescription').innerHTML = `Breadth-First Search is <i><b>unweighted</b></i> and <i><b>does guarantee</b></i> the shortest path!`;
-    }    else{
-      document.getElementById('algoDescription').innerHTML = "Select an algorithm to visualize!";
-    }
-    
   }
 
   animate(visitedNodesInOrder, path) {

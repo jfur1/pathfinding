@@ -16,10 +16,10 @@ export default class PathfindingVisualizer extends Component {
     super();
     this.state = {
       grid: [],
-      START_NODE_ROW: 7,
-      START_NODE_COL: 10,
-      FINISH_NODE_ROW: 10,
-      FINISH_NODE_COL: 6,
+      START_NODE_ROW: 5,
+      START_NODE_COL: 5,
+      FINISH_NODE_ROW: 5,
+      FINISH_NODE_COL: 15,
       mousePressed: false,
       N_ROWS: 20,
       N_COLS: 50,
@@ -86,11 +86,11 @@ export default class PathfindingVisualizer extends Component {
   ) => {
     const initialGrid = [];
     for(let row = 0; row < n_rows; row++){
-      const row = [];
+      const tmpRow = [];
       for(let col = 0; col < n_cols; col++){
-        row.push(this.newNode(row, col));
+        tmpRow.push(this.newNode(row, col));
       }
-      initialGrid.push(row);
+      initialGrid.push(tmpRow);
     }
     return initialGrid;
   };

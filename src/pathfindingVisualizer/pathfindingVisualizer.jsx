@@ -140,29 +140,26 @@ export default class PathfindingVisualizer extends Component {
       }
   }
   // Same as init grid, exept walls & start/goal nodes are kept
-  clearGrid(reset) {
+  clearGrid() {
     if(this.algoFinished){
-
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
-
           if(row === START_NODE_ROW && col === START_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-start';
           }
           else if(row === FINISH_NODE_ROW && col === FINISH_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-finish';
           }
-          else if(reset === true){
+          else if(document.getElementById(`node-${row}-${col}`).className === "node node-visited"){
             document.getElementById(`node-${row}-${col}`).className = 'node';
-            node.isWall = false;
           }
-          else if(document.getElementById(`node-${row}-${col}`).className !== "node node-wall"){
-              document.getElementById(`node-${row}-${col}`).className = 'node';
-          }
+          else if(document.getElementById(`node-${row}-${col}`).className === "node node-shortest-path"){
+            document.getElementById(`node-${row}-${col}`).className = 'node';
           }
         }
       }
     }
+  }
   
   // Initialize New Grid
   initGrid = () => {

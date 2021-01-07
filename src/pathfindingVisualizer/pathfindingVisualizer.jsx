@@ -174,7 +174,7 @@ export default class PathfindingVisualizer extends Component {
 
   handleMouseEnter(row, col) {
     if (!this.state.isRunning) {
-      if (this.state.mouseIsPressed) {
+      if (this.state.mousePressed) {
         const nodeClassName = document.getElementById(`node-${row}-${col}`)
           .className;
         if (this.state.isStartNode) {
@@ -221,7 +221,7 @@ export default class PathfindingVisualizer extends Component {
 
   handleMouseUp(row, col) {
     if (!this.state.isRunning) {
-      this.setState({mouseIsPressed: false});
+      this.setState({mousePressed: false});
       if (this.state.isStartNode) {
         const isStartNode = !this.state.isStartNode;
         this.setState({isStartNode, START_NODE_ROW: row, START_NODE_COL: col});
@@ -240,13 +240,13 @@ export default class PathfindingVisualizer extends Component {
   handleMouseLeave() {
     if (this.state.isStartNode) {
       const isStartNode = !this.state.isStartNode;
-      this.setState({isStartNode, mouseIsPressed: false});
+      this.setState({isStartNode, mousePressed: false});
     } else if (this.state.isFinishNode) {
       const isFinishNode = !this.state.isFinishNode;
-      this.setState({isFinishNode, mouseIsPressed: false});
+      this.setState({isFinishNode, mousePressed: false});
     } else if (this.state.isWallNode) {
       const isWallNode = !this.state.isWallNode;
-      this.setState({isWallNode, mouseIsPressed: false});
+      this.setState({isWallNode, mousePressed: false});
       this.initGrid();
     }
   }

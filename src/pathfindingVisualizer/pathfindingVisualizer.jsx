@@ -145,7 +145,7 @@ export default class PathfindingVisualizer extends Component {
 
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
-          let node = this.state.grid[row][col];
+
           if(row === START_NODE_ROW && col === START_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-start';
           }
@@ -156,21 +156,9 @@ export default class PathfindingVisualizer extends Component {
             document.getElementById(`node-${row}-${col}`).className = 'node';
             node.isWall = false;
           }
-          else if(document.getElementById(`node-${row}-${col}`).className === "node node-wall"){
-            document.getElementById(`node-${row}-${col}`).className = 'node node-wall';
-          }
           else if(document.getElementById(`node-${row}-${col}`).className !== "node node-wall"){
               document.getElementById(`node-${row}-${col}`).className = 'node';
           }
-          
-          // Reset data associated with node for the new search
-          node.previousNode = null;
-          node.g = Infinity;
-          node.h = 0;
-          node.f = Infinity;
-          node.isVisited = false;
-          node.status = 'node';
-          this.state.grid[row][col] = node;
           }
         }
       }

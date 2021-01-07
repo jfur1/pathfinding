@@ -176,8 +176,7 @@ export default class PathfindingVisualizer extends Component {
             this.setState({row: r, col: c});
             const currStartNode = this.state.grid[r][c];
             currStartNode.isStart = true;
-            document.getElementById(`node-${r}-${c}`).className ='node node-start';
-          }
+            document.getElementById(`node-${r}-${c}`).className ='node node-start';}
           this.setState({START_NODE_ROW: r, START_NODE_COL: c});
         } else if (this.state.isFinishN) {
           if (nodeClass !== 'node node-wall') {
@@ -185,7 +184,7 @@ export default class PathfindingVisualizer extends Component {
             prevFinish.isFinish = false;
             document.getElementById(`node-${this.state.r}-${this.state.c}`,).className = 'node';
             this.setState({row: r, col: c});
-            const currentFinish = this.state.grid[row][c];
+            const currentFinish = this.state.grid[r][c];
             currentFinish.isFinish = true;
             document.getElementById(`node-${r}-${c}`).className = 'node node-finish';
           }

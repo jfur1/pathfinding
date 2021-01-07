@@ -1,4 +1,6 @@
+
 import React, {Component} from 'react';
+
 import './Node.css';
 
 export default class Node extends Component {
@@ -12,14 +14,9 @@ export default class Node extends Component {
       onMouseEnter,
       onMouseUp,
       row,
-      g,
-      h,
-      f,
-      direction,
-      weight,
-      status
     } = this.props;
-    const type = isFinish
+    
+    const extraClassName = isFinish
       ? 'node-finish'
       : isStart
       ? 'node-start'
@@ -28,12 +25,12 @@ export default class Node extends Component {
       : '';
 
     return (
-      <div
+      <td
         id={`node-${row}-${col}`}
-        className={`node ${type}`}
+        className={`node ${extraClassName}`}
         onMouseDown={() => onMouseDown(row, col)}
         onMouseEnter={() => onMouseEnter(row, col)}
-        onMouseUp={() => onMouseUp()}></div>
+        onMouseUp={() => onMouseUp()}></td>
     );
   }
 }

@@ -29,8 +29,8 @@ export default class PathfindingVisualizer extends Component {
       isStart: false,
       isFinish: false,
       isWall: false,
-      row: 0,
-      col: 0,
+      curRow: 0,
+      curCol: 0,
       isDesktop: true,
     };
     // Event Handler Prototypes
@@ -120,15 +120,15 @@ export default class PathfindingVisualizer extends Component {
           this.setState({
             mousePressed: true,
             isStart: true,
-            row: r,
-            col: c,
+            curRow: r,
+            curCol: c,
           });
         } else if(document.getElementById(`node-${r}-${c}`).className === 'node node-finish'){
           this.setState({
             mousePressed: true,
             isFinish: true,
-            row: r,
-            col: c,
+            curRow: r,
+            curCol: c,
           });
         } else{
           const newGrid = updateGrid(this.state.grid, r, c);
@@ -136,8 +136,8 @@ export default class PathfindingVisualizer extends Component {
             grid: newGrid, 
             mousePressed: true,
             isWall: true,
-            row: r,
-            col: c,
+            curRow: r,
+            curCol: c,
           });
         }
       } else{
@@ -170,20 +170,20 @@ export default class PathfindingVisualizer extends Component {
           .className;
         if (this.state.isStart) {
           if (nodeClass !== 'node node-wall') {
-            const prevStartNode = this.state.grid[this.state.row][this.state.col];
+            const prevStartNode = this.state.grid[this.state.curRow][this.state.curCol];
             prevStartNode.isStart = false;
-            document.getElementById(`node-${this.state.row}-${this.state.col}`,).className = 'node';
-            this.setState({row: r, col: c});
+            document.getElementById(`node-${this.state.curRow}-${this.state.curCol}`,).className = 'node';
+            this.setState({curRow: r, curCol: c});
             const currStartNode = this.state.grid[r][c];
             currStartNode.isStart = true;
             document.getElementById(`node-${r}-${c}`).className ='node node-start';}
           this.setState({START_NODE_ROW: r, START_NODE_COL: c});
         } else if (this.state.isFinishN) {
           if (nodeClass !== 'node node-wall') {
-            const prevFinish = this.state.grid[this.state.row][this.state.col];
+            const prevFinish = this.state.grid[this.state.curRow][this.state.curCol];
             prevFinish.isFinish = false;
-            document.getElementById(`node-${this.state.row}-${this.state.col}`,).className = 'node';
-            this.setState({row: r, col: c});
+            document.getElementById(`node-${this.state.curRow}-${this.state.curCol}`,).className = 'node';
+            this.setState({curRow: r, curCol: c});
             const currentFinish = this.state.grid[r][c];
             currentFinish.isFinish = true;
             document.getElementById(`node-${r}-${c}`).className = 'node node-finish';
@@ -217,14 +217,14 @@ export default class PathfindingVisualizer extends Component {
 
   handleMouseLeave() {
     if (this.state.isStart) {
-      const startNode = !this.state.isStart;
-      this.setState({startNode, mousePressed: false});
+      const isStart = !this.state.isStart;
+      this.setState({isStart, mousePressed: false});
     } else if (this.state.isFinish) {
-      const finishNode = !this.state.isFinish;
-      this.setState({finishNode, mousePressed: false});
+      const isFinish = !this.state.isFinish;
+      this.setState({isFinish, mousePressed: false});
     } else if (this.state.isWall) {
-      const wallNode = !this.state.isWall;
-      this.setState({wallNode, mousePressed: false});
+      const isWall = !this.state.isWall;
+      this.setState({isWall, mousePressed: false});
       this.initGrid();
     }
   }

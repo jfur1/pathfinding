@@ -143,7 +143,8 @@ export default class PathfindingVisualizer extends Component {
     if(this.algoFinished){
       for(let row = 0; row < 20; row++) {
         for (let col = 0; col < 50; col++) {
-
+          this.state.grid[row][col].previousNode = null;
+          this.state.grid[row][col].isVisited = false;
           if(row === START_NODE_ROW && col === START_NODE_COL){
             document.getElementById(`node-${row}-${col}`).className = 'node node-start';
           }

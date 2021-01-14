@@ -2,3 +2,4 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+[![banner](public/pathfinding.gif)](https://jfur1.github.io/pathfinding)

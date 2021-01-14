@@ -169,9 +169,7 @@ export default class PathfindingVisualizer extends Component {
             curCol: col,
           });
         }
-      } else {
-        this.clearGrid();
-      }
+      } 
     }
   }
 

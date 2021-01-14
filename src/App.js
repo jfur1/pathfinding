@@ -1,12 +1,11 @@
 import React from 'react';
 import './App.css';
 import PathfindingVisualizer from './pathfindingVisualizer/pathfindingVisualizer';
-import Navbar from './navbar';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (    
     <div className="App">
-      <Navbar></Navbar>
       <PathfindingVisualizer></PathfindingVisualizer>
     </div> 
   );

@@ -1,10 +1,146 @@
-.grid {
-    margin: 45px 0 0;
-  }
+.grid-container {
+  margin: 2% auto;
+}
 
-  .center {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-  }
+.grid {
+  white-space: pre;
+}
+
+button {
+  margin: 2px;
+}
+
+#programButtons{
+  padding: 25px 5px 15px 0;
+}
+
+#algoDescription{
+  text-align: center;
+  color: #334444;
+  margin-top: 25px;
+}
+/* -------------------- Legend ------------------------- */
+
+#legend div{
+  width: 25px;
+  height: 25px;
+  display: inline-block;
+  position: relative;
+  top: 0.35em;
+  margin: 0px 0.42em;
+}
+
+#legend ul {
+  display: inline;
+  list-style-type: disc;
+  padding-top: 10px;
+}
+li {
+  display: inline-block;
+  text-align: center;
+}
+
+#legend > ul li {
+  display: inline-block;
+  list-style: none;
+  padding: 10px 10px 0 0;
+}
+
+.start-legend{
+  border: 1px solid rgb(175, 216, 248);
+  background-color: green;
+  background-position: center;
+  background-size: contain;
+}
+
+.target-legend{
+  border: 1px solid rgb(175, 216, 248);
+  background-color: red;
+  background-position: center;
+  background-size: contain;
+}
+
+.unvisited-legend{
+  border: 1px solid rgb(159, 210, 249);
+  background-position: center;
+  background-size: contain;
+}
+
+.visited-legend{
+  border: 1px solid rgb(175, 216, 248);
+  background-color: rgba(250, 129, 222, 0.831);
+  background-position: center;
+  background-size: contain;
+}
+.visited-legend-2{
+  border: 1px solid rgb(175, 216, 248);
+  background-color: rgba(74, 192, 255, 0.75);
+  background-position: center;
+  background-size: contain;
+}
+
+.path-legend{
+  border: 1px solid rgb(175, 216, 248);
+  background-color:rgb(255, 254, 106);
+  background-position: center;
+  background-size: contain;
+}
+
+.wall-legend{
+  border: 1px solid rgb(175, 216, 248);
+  background-color: rgb(12, 53, 71);
+  background-position: center;
+  background-size: contain;
+}
+
+/* ------------------------- Dropdown Styling ------------------------------ */
+
+.dropdown {
+  display: inline-block;
+  margin-right: .25rem;
+}
+
+.dropdown .dropbtn {
+  cursor: pointer;
+  font-size: 16px;  
+  border: 1px solid transparent;
+  outline: none;
+  color: white;
+  padding: .375rem .75rem;
+  background-color: #343a40;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.5;
+  border-radius: .25rem;
+  margin: 0;
+  vertical-align: middle;
+}
+
+.dropdown:hover .dropbtn, .dropbtn:focus {
+  background-color: rgb(47, 160, 194);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 140px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.show {
+  display: block;
+}

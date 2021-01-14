@@ -501,9 +501,9 @@ export default class PathfindingVisualizer extends Component {
           <div class="dropdown">
               <button id="animation-speed" onClick={() => this.toggleDropdown()} class="dropbtn">Animation Speed: Medium</button>
               <div id="myDropdown" class="dropdown-content">
-                  <a href="#" id="animate-slow" onClick={() => this.toggleSpeed("Slow")}>Slow</a>
-                  <a href="#" id="animate-medium" onClick={() => this.toggleSpeed("Medium")}>Medium</a>
-                  <a href="#" id="animate-fast" onClick={() => this.toggleSpeed("Fast")}>Fast</a>
+                  <a href="" id="animate-slow" onClick={() => this.toggleSpeed("Slow")}>Slow</a>
+                  <a href="" id="animate-medium" onClick={() => this.toggleSpeed("Medium")}>Medium</a>
+                  <a href="" id="animate-fast" onClick={() => this.toggleSpeed("Fast")}>Fast</a>
               </div>
           </div>
           {this.state.isDesktopView ? (

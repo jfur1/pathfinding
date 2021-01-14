@@ -27,6 +27,8 @@ export default class PathfindingVisualizer extends Component {
       curRow: 0,
       curCol: 0,
       isDesktop: true,
+      visitedAnimationSpeed: 10,
+      shortestPathAnimationSpeed: 40,
     };
     // Event Handler Prototypes
     this.handleMouseDown = this.handleMouseDown.bind(this);
@@ -75,6 +77,26 @@ export default class PathfindingVisualizer extends Component {
         }
       }
     }
+  }
+
+  toggleDropdown(){
+    if(!this.state.isRunning){
+      document.getElementById("myDropdown").classList.toggle("show");
+    }
+  }
+
+  toggleSpeed(speed){
+      if(!this.state.isRunning){
+        this.toggleDropdown();
+        document.getElementById("animation-speed").innerHTML = `Animation Speed: \n${speed}`;
+        if(speed === "Slow"){
+          this.setState({visitedAnimationSpeed: 25, shortestPathAnimationSpeed: 55});
+        } else if(speed === "Medium"){
+          this.setState({visitedAnimationSpeed: 10, shortestPathAnimationSpeed: 40});
+        } else{
+          this.setState({visitedAnimationSpeed: 5, shortestPathAnimationSpeed: 25});
+        }
+      }
   }
 
   /* -------------------- Initialize 2D Grid --------------------- */
@@ -371,7 +393,7 @@ export default class PathfindingVisualizer extends Component {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
           this.animatePath(path);
-        }, 10 * i);
+        }, this.state.visitedAnimationSpeed * i);
         return;
       }
       setTimeout(() => {
@@ -386,7 +408,7 @@ export default class PathfindingVisualizer extends Component {
           document.getElementById(`node-${node.row}-${node.col}`).className =
             'node node-visited';
         }
-      }, 10 * i);
+      }, this.state.visitedAnimationSpeed * i);
     }
   }
 
@@ -395,7 +417,7 @@ export default class PathfindingVisualizer extends Component {
       if (path[i] === 'end') {
         setTimeout(() => {
           this.toggleIsRunning();
-        }, i * 50);
+        }, i * this.state.shortestPathAnimationSpeed);
       } else {
         setTimeout(() => {
           const node = path[i];
@@ -409,7 +431,7 @@ export default class PathfindingVisualizer extends Component {
             document.getElementById(`node-${node.row}-${node.col}`).className =
               'node node-shortest-path';
           }
-        }, i * 40);
+        }, i * this.state.shortestPathAnimationSpeed);
       }
     }
   }
@@ -423,16 +445,6 @@ export default class PathfindingVisualizer extends Component {
             <a className="navbar-brand" href="https://jfur1.github.io/pathfinding">
               <b>PathFinding Visualizer</b>
             </a>
-            <button
-              className="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav">
                 <li className="nav-item">
@@ -488,6 +500,14 @@ export default class PathfindingVisualizer extends Component {
             onClick={() => this.visualize('DFS')}>
             Depth-First Search
           </button>
+          <div class="dropdown">
+              <button id="animation-speed" onClick={() => this.toggleDropdown()} class="dropbtn">Animation Speed: Medium</button>
+              <div id="myDropdown" class="dropdown-content">
+                  <a href="#" id="animate-slow" onClick={() => this.toggleSpeed("Slow")}>Slow</a>
+                  <a href="#" id="animate-medium" onClick={() => this.toggleSpeed("Medium")}>Medium</a>
+                  <a href="#" id="animate-fast" onClick={() => this.toggleSpeed("Fast")}>Fast</a>
+              </div>
+          </div>
           {this.state.isDesktopView ? (
             <button
               type="button"
@@ -591,3 +611,17 @@ export default class PathfindingVisualizer extends Component {
     }
     return path;
   }
+
+  // Close the dropdown menu if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+  var dropdowns = document.getElementsByClassName("dropdown-content");
+  var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}

@@ -87,6 +87,7 @@ export default class PathfindingVisualizer extends Component {
 
   toggleSpeed(speed){
       if(!this.state.isRunning){
+        console.log(speed);
         this.toggleDropdown();
         document.getElementById("animation-speed").innerHTML = `Animation Speed: \n${speed}`;
         if(speed === "Slow"){
@@ -380,13 +381,22 @@ export default class PathfindingVisualizer extends Component {
       }
       else if(algo === "BFS"){
         document.getElementById('algoDescription').innerHTML = `Breadth-First Search is <i><b>unweighted</b></i> and <i><b>does guarantee</b></i> the shortest path!`;
-      }    else{
+      } else if(algo === "noPathFound"){
+        document.getElementById('algoDescription').innerHTML = `<b>No path</b> exists from start to goal!`;
+      } else{
         document.getElementById('algoDescription').innerHTML = "Select an algorithm to visualize!<br><br>Try drawing some walls or moving the start / target nodes!";
       }
     }
   }
 
   animate(visitedNodesInOrder, path) {
+    console.log(visitedNodesInOrder);
+    console.log(path);
+    if(path.length === 2 || !visitedNodesInOrder || typeof(visitedNodesInOrder) === "undefined" || typeof(path) === "undefined"){
+      this.updateAlgoDescription("noPathFound");
+      this.setState({isRunning: false});
+      return;
+    }
     for (let i = 0; i <= visitedNodesInOrder.length; i++) {
       if (i === visitedNodesInOrder.length) {
         setTimeout(() => {
@@ -498,12 +508,12 @@ export default class PathfindingVisualizer extends Component {
             onClick={() => this.visualize('DFS')}>
             Depth-First Search
           </button>
-          <div class="dropdown">
-              <button id="animation-speed" onClick={() => this.toggleDropdown()} class="dropbtn">Animation Speed: Medium</button>
-              <div id="myDropdown" class="dropdown-content">
-                  <a href="" id="animate-slow" onClick={() => this.toggleSpeed("Slow")}>Slow</a>
-                  <a href="" id="animate-medium" onClick={() => this.toggleSpeed("Medium")}>Medium</a>
-                  <a href="" id="animate-fast" onClick={() => this.toggleSpeed("Fast")}>Fast</a>
+          <div className="dropdown">
+              <button id="animation-speed" onClick={() => this.toggleDropdown()} className="dropbtn">Animation Speed: Medium</button>
+              <div id="myDropdown" className="dropdown-content">
+                  <a href="#" id="animate-slow" onClick={() => this.toggleSpeed("Slow")}>Slow</a>
+                  <a href="#" id="animate-medium" onClick={() => this.toggleSpeed("Medium")}>Medium</a>
+                  <a href="#" id="animate-fast" onClick={() => this.toggleSpeed("Fast")}>Fast</a>
               </div>
           </div>
           {this.state.isDesktopView ? (
@@ -524,26 +534,26 @@ export default class PathfindingVisualizer extends Component {
           </div>
           <div id="legend">
             <ul>
-              <li><div class="start-legend"></div>Start Node</li>
+              <li><div className="start-legend"></div>Start Node</li>
             </ul>
             <ul>
-              <li><div class="target-legend"></div>Target Node</li>
+              <li><div className="target-legend"></div>Target Node</li>
             </ul>
             <ul>
-              <li><div class="unvisited-legend"></div>Unvisited Node</li>
+              <li><div className="unvisited-legend"></div>Unvisited Node</li>
             </ul>
             <ul>
               <li>
-                <div class="visited-legend"></div>
-                <div class="visited-legend-2"></div>
+                <div className="visited-legend"></div>
+                <div className="visited-legend-2"></div>
                 Visited Node
               </li>
             </ul>
             <ul>
-              <li><div class="wall-legend"></div>Wall Node</li>
+              <li><div className="wall-legend"></div>Wall Node</li>
             </ul>
             <ul>
-              <li><div class="path-legend"></div>Shortest-Path Node</li>
+              <li><div className="path-legend"></div>Shortest-Path Node</li>
             </ul>
           </div>
           <div id="algoDescription"></div>
